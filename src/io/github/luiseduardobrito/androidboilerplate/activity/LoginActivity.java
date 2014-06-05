@@ -31,11 +31,9 @@ import android.widget.TextView;
 public class LoginActivity extends Activity {
 
 	/**
-	 * The default email to populate the email field with.
+	 * Extra email from Intent
 	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
-
-	@Extra(EXTRA_EMAIL)
+	@Extra("io.github.luiseduardobrito.androidboilerplate.EMAIL")
 	String mExtraEmail;
 
 	/**
@@ -88,7 +86,14 @@ public class LoginActivity extends Activity {
 	 */
 	@Click(R.id.sign_in_button)
 	void attemptLogin() {
+
+		// Get short time animation
+		int animTime = getResources().getInteger(
+				android.R.integer.config_mediumAnimTime);
+
 		showProgress(true);
+
+		// Prepare handler to call sign in
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 
@@ -97,7 +102,7 @@ public class LoginActivity extends Activity {
 				showProgress(false);
 			}
 
-		}, 3000);
+		}, animTime * 3);
 	}
 
 	/**
