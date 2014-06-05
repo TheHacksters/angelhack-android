@@ -1,6 +1,8 @@
 package io.github.luiseduardobrito.androidboilerplate.fragment;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
+import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter;
+import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter_;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -17,13 +19,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -67,6 +69,8 @@ public class DrawerFragment extends Fragment {
 	private DrawerLayout mDrawerLayout;
 	private View mFragmentContainerView;
 
+	private DrawerItemAdapter adapter;
+
 	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
@@ -96,13 +100,9 @@ public class DrawerFragment extends Fragment {
 						selectItem(position);
 					}
 				});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
-				.getThemedContext(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, new String[] {
-						getString(R.string.title_section1),
-						getString(R.string.title_section2),
-						getString(R.string.title_section3), }));
+
+		adapter = DrawerItemAdapter_.getInstance_(getActivity());
+		mDrawerListView.setAdapter(adapter);
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 	}
 
@@ -316,7 +316,10 @@ public class DrawerFragment extends Fragment {
 	}
 
 	public void toggle() {
-		// TODO Auto-generated method stub
-		
+		if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
+		} else {
+			mDrawerLayout.openDrawer(Gravity.LEFT);
+		}
 	}
 }
