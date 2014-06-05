@@ -1,6 +1,12 @@
 package io.github.luiseduardobrito.androidboilerplate.fragment;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
+
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -19,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
@@ -27,6 +34,7 @@ import android.widget.ListView;
  * > design guidelines</a> for a complete explanation of the behaviors
  * implemented here.
  */
+@EFragment(R.layout.fragment_navigation_drawer)
 public class DrawerFragment extends Fragment {
 
 	/**
@@ -50,20 +58,21 @@ public class DrawerFragment extends Fragment {
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
 
+	@ViewById(R.id.drawer_list)
+	ListView mDrawerListView;
+
+	@ViewById(R.id.drawer_content_layout)
+	RelativeLayout mDrawerContentLayout;
+
 	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
 	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
-	public DrawerFragment() {
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	@AfterInject
+	void init() {
 
 		// Read in the flag indicating whether or not the user has demonstrated
 		// awareness of the
@@ -71,30 +80,14 @@ public class DrawerFragment extends Fragment {
 		SharedPreferences sp = PreferenceManager
 				.getDefaultSharedPreferences(getActivity());
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+	}
 
-		if (savedInstanceState != null) {
-			mCurrentSelectedPosition = savedInstanceState
-					.getInt(STATE_SELECTED_POSITION);
-			mFromSavedInstanceState = true;
-		}
+	@AfterViews
+	void initViews() {
 
 		// Select either the default item (0) or the last selected item.
 		selectItem(mCurrentSelectedPosition);
-	}
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		// Indicate that this fragment would like to influence the set of
-		// actions in the action bar.
-		setHasOptionsMenu(true);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		mDrawerListView = (ListView) inflater.inflate(
-				R.layout.fragment_navigation_drawer, container, false);
 		mDrawerListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
@@ -111,7 +104,38 @@ public class DrawerFragment extends Fragment {
 						getString(R.string.title_section2),
 						getString(R.string.title_section3), }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-		return mDrawerListView;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Indicate that this fragment would like to influence the set of
+		// actions in the action bar.
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		// Read in the flag indicating whether or not the user has demonstrated
+		// awareness of the
+		// drawer. See PREF_USER_LEARNED_DRAWER for details.
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(getActivity());
+		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+
+		if (savedInstanceState != null) {
+			mCurrentSelectedPosition = savedInstanceState
+					.getInt(STATE_SELECTED_POSITION);
+			mFromSavedInstanceState = true;
+		}
+
+		// Select either the default item (0) or the last selected item.
+		selectItem(mCurrentSelectedPosition);
+
+		// Return null to android annotations handle layout inflate
+		return null;
 	}
 
 	public boolean isDrawerOpen() {
@@ -138,7 +162,7 @@ public class DrawerFragment extends Fragment {
 				GravityCompat.START);
 		// set up the drawer's list view with items and click listener
 
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getActivity().getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
 
