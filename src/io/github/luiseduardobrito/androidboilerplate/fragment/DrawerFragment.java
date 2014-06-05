@@ -314,4 +314,9 @@ public class DrawerFragment extends Fragment {
 		 */
 		void onNavigationDrawerItemSelected(int position);
 	}
+
+	public void toggle() {
+		// TODO Auto-generated method stub
+		
+	}
 }

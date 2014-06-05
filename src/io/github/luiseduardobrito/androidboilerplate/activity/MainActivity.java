@@ -15,6 +15,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -84,6 +85,20 @@ public class MainActivity extends Activity implements
 			mTitle = getString(R.string.title_section3);
 			break;
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		int id = item.getItemId();
+		switch (id) {
+
+		case android.R.id.home:
+			mNavigationDrawerFragment.toggle();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 	public void restoreActionBar() {

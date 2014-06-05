@@ -18,7 +18,13 @@ public enum ErrorCode {
 	INVALID_FIELD(200, R.string.invalid_field),
 	INVALID_NAME(201, R.string.invalid_name),
 	INVALID_EMAIL(202, R.string.invalid_email),
-	INVALID_PASSWORD(203, R.string.invalid_password);
+	INVALID_PASSWORD(203, R.string.invalid_password),
+
+	/**
+	 * Login Errors
+	 */
+	AUTH_UNKNOWN_ERROR(300, R.string.auth_unknown),
+	AUTH_INVALID_INFO(301, R.string.auth_invalid_info);
 
 	/**
 	 * Protected fields

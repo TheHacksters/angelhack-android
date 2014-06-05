@@ -30,4 +30,7 @@
     <string name="invalid_password_length">Password should be at least %1$s characters long</string>
     <string name="invalid_password_confirmation">Confirmation and password don\'t match</string>
 
+    <!-- App Authentication Errors -->
+    <string name="auth_unknown">Unknown auth error</string>
+    <string name="auth_invalid_info">Invalid authentication information</string>
 </resources>
