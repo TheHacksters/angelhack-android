@@ -255,13 +255,22 @@ public class DrawerFragment extends Fragment {
 	 * @param position
 	 */
 	private void selectItem(int position) {
+
 		mCurrentSelectedPosition = position;
+
 		if (mDrawerListView != null) {
+			
 			mDrawerListView.setItemChecked(position, true);
+			
+			if (adapter != null) {
+				adapter.setSelected(position);
+			}
 		}
+
 		if (mDrawerLayout != null) {
 			mDrawerLayout.closeDrawer(mFragmentContainerView);
 		}
+
 		if (mCallbacks != null) {
 			mCallbacks.onNavigationDrawerItemSelected(position);
 		}

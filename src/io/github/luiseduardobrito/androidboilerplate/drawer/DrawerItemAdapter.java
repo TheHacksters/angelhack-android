@@ -1,9 +1,12 @@
 package io.github.luiseduardobrito.androidboilerplate.drawer;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
+import io.github.luiseduardobrito.androidboilerplate.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
@@ -17,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 @EBean(scope = Scope.Singleton)
-public class DrawerItemAdapter extends BaseAdapter {
+public class DrawerItemAdapter extends BaseAdapter implements Observer {
 
 	@RootContext
 	Context context;
@@ -38,16 +41,84 @@ public class DrawerItemAdapter extends BaseAdapter {
 	 */
 	@AfterInject
 	void init() {
+		this.update();
+	}
+
+	/**
+	 * Set selected item
+	 * 
+	 * @param position
+	 */
+	public void setSelected(Integer position) {
+
+		// Get current user
+		User me = User.getCurrent();
+
+		// Check user item is shown
+		if (me != null) {
+			
+			for (int i = 1; i < items.size(); i++) {
+				items.get(i).setLabelSelected(position.equals(i));
+			}
+			
+			return;
+		}
+
+		// Iterate selecting stuff
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).setLabelSelected(position.equals(i));
+		}
+	}
+
+	/**
+	 * Update state
+	 */
+	public void update() {
+		update(null, null);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable observable, Object data) {
 
 		// Create items list
 		items = new ArrayList<DrawerItem>();
 
+		// Get current user
+		User me = User.getCurrent();
+
+		// Bind drawer user item
+		if (me != null) {
+			DrawerUserItem userItem = DrawerUserItem_.build(context);
+			userItem.bind(me);
+			items.add(userItem);
+		}
+
+		Boolean first = true;
+
 		// Populate drawer items
 		for (String label : drawerItemsLabels) {
+
 			DrawerItem item = DrawerItem_.build(context);
-			item.bind(label);
+
+			if (first) {
+				item.bind(label, true);
+				first = false;
+			}
+
+			else {
+				item.bind(label);
+			}
+
 			items.add(item);
 		}
+
+		// Notify lsitview
+		this.notifyDataSetChanged();
 	}
 
 	/*

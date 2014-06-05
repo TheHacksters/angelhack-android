@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +28,8 @@
             android:name="io.github.luiseduardobrito.androidboilerplate.activity.LoginActivity_"
             android:label="@string/title_activity_login"
             android:parentActivityName="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
     </application>
 

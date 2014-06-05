@@ -3,8 +3,8 @@
     android:id="@+id/drawer_content_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cccc"
-    tools:context="io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment" >
+    android:background="#FAFAFA"
+    tools:context="io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment_" >
 
     <ListView
         android:id="@+id/drawer_list"

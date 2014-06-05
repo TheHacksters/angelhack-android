@@ -13,10 +13,13 @@ import android.widget.TextView;
 public class DrawerUserItem extends DrawerItem {
 
 	/**
-	 * UI Reference
+	 * UI References
 	 */
-	@ViewById(R.id.label)
-	TextView label;
+	@ViewById(R.id.name)
+	TextView name;
+
+	@ViewById(R.id.group)
+	TextView group;
 
 	/**
 	 * Constructor
@@ -33,7 +36,7 @@ public class DrawerUserItem extends DrawerItem {
 	 * @param user
 	 */
 	public void bind(User user) {
-		bind(user.getName());
+		bind(user.getName(), "Example Inc.");
 	}
 
 	/*
@@ -45,6 +48,22 @@ public class DrawerUserItem extends DrawerItem {
 	 */
 	@Override
 	public void bind(String label) {
-		this.label.setText(label);
+		this.name.setText(label);
+	}
+
+	/**
+	 * Bind user name and group
+	 * 
+	 * @param label
+	 * @param group
+	 */
+	public void bind(String label, String group) {
+		this.name.setText(label);
+		this.group.setText(group);
+	}
+
+	@Override
+	public void setLabelSelected(Boolean selected) {
+		return;
 	}
 }

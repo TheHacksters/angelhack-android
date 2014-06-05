@@ -1,8 +1,12 @@
 package io.github.luiseduardobrito.androidboilerplate.activity;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
+import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter;
+import io.github.luiseduardobrito.androidboilerplate.exception.AppException;
+import io.github.luiseduardobrito.androidboilerplate.model.User;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -35,6 +39,9 @@ public class LoginActivity extends Activity {
 	 */
 	@Extra("io.github.luiseduardobrito.androidboilerplate.EMAIL")
 	String mExtraEmail;
+
+	@Bean
+	DrawerItemAdapter drawerAdapter;
 
 	/**
 	 * UI references
@@ -91,6 +98,7 @@ public class LoginActivity extends Activity {
 		int animTime = getResources().getInteger(
 				android.R.integer.config_mediumAnimTime);
 
+		// Show progress animation
 		showProgress(true);
 
 		// Prepare handler to call sign in
@@ -99,6 +107,16 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void run() {
+
+				try {
+					User.signUp("Luis Eduardo Brito",
+							"luiseduardo14@gmail.com", "luisluis");
+					LoginActivity.this.finish();
+					drawerAdapter.update();
+
+				} catch (AppException e) {
+					e.printStackTrace();
+				}
 				showProgress(false);
 			}
 
