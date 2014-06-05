@@ -75,6 +75,9 @@ public class DrawerFragment extends Fragment {
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
+	/**
+	 * Initialize fragment
+	 */
 	@AfterInject
 	void init() {
 
@@ -86,6 +89,9 @@ public class DrawerFragment extends Fragment {
 		mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 	}
 
+	/**
+	 * Initialize views
+	 */
 	@AfterViews
 	void initViews() {
 
@@ -106,6 +112,9 @@ public class DrawerFragment extends Fragment {
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onActivityCreated(android.os.Bundle)
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -114,6 +123,9 @@ public class DrawerFragment extends Fragment {
 		setHasOptionsMenu(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -232,6 +244,11 @@ public class DrawerFragment extends Fragment {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
+	/**
+	 * Select item in the drawer
+	 * 
+	 * @param position
+	 */
 	private void selectItem(int position) {
 		mCurrentSelectedPosition = position;
 		if (mDrawerListView != null) {
@@ -245,6 +262,9 @@ public class DrawerFragment extends Fragment {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onAttach(android.app.Activity)
+	 */
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -256,18 +276,27 @@ public class DrawerFragment extends Fragment {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onDetach()
+	 */
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		mCallbacks = null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onConfigurationChanged(android.content.res.Configuration)
+	 */
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -275,6 +304,9 @@ public class DrawerFragment extends Fragment {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// If the drawer is open, show the global app actions in the action bar.
@@ -300,6 +332,11 @@ public class DrawerFragment extends Fragment {
 		actionBar.setTitle(R.string.app_name);
 	}
 
+	/**
+	 * Get action bar instance
+	 * 
+	 * @return actionBar
+	 */
 	private ActionBar getActionBar() {
 		return getActivity().getActionBar();
 	}
