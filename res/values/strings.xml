@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App General Strings -->
     <string name="app_name">androidboilerplate</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -8,6 +9,25 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- App Common Strings -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_label">Continue</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="settings">Settings</string>
+
+    <!-- App General Errors -->
+    <string name="unknown_exception">Unknown exception</string>
+    <string name="unknown_runtime_exception">Unknown runtime exception</string>
+
+    <!-- App Validation Errors -->
+    <string name="invalid_field">Invalid field</string>
+    <string name="invalid_name">Invalid name</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="invalid_password_length">Password should be at least %1$s characters long</string>
+    <string name="invalid_password_confirmation">Confirmation and password don\'t match</string>
 
 </resources>

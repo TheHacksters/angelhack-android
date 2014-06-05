@@ -1,7 +1,7 @@
 # Built application files
 *.apk
 *.ap_
-*.apt-generated
+*.apt_generated
 
 # Files for the Dalvik VM
 *.dex

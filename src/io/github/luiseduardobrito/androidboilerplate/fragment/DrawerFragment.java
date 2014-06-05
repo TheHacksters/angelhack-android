@@ -1,5 +1,6 @@
-package io.github.luiseduardobrito.androidboilerplate;
+package io.github.luiseduardobrito.androidboilerplate.fragment;
 
+import io.github.luiseduardobrito.androidboilerplate.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,13 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
@@ -28,7 +27,7 @@ import android.widget.Toast;
  * > design guidelines</a> for a complete explanation of the behaviors
  * implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class DrawerFragment extends Fragment {
 
 	/**
 	 * Remember the position of the selected item.
@@ -59,7 +58,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;
 
-	public NavigationDrawerFragment() {
+	public DrawerFragment() {
 	}
 
 	@Override
@@ -263,21 +262,6 @@ public class NavigationDrawerFragment extends Fragment {
 			showGlobalContextActionBar();
 		}
 		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-
-		if (item.getItemId() == R.id.action_example) {
-			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT)
-					.show();
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
 	}
 
 	/**
