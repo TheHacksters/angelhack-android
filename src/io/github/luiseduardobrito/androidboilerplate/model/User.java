@@ -3,6 +3,10 @@ package io.github.luiseduardobrito.androidboilerplate.model;
 import io.github.luiseduardobrito.androidboilerplate.exception.AppException;
 import io.github.luiseduardobrito.androidboilerplate.exception.ErrorCode;
 
+/**
+ * @author luiseduardobrito
+ * 
+ */
 public class User extends Model {
 
 	public static final int MIN_PASSWORD_LENGTH = 6;
@@ -72,6 +76,16 @@ public class User extends Model {
 		if (password.isEmpty() || password.length() < MIN_PASSWORD_LENGTH) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD);
 		}
+	}
+
+	/**
+	 * Set user name
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+		this.setChangeAndNotify();
 	}
 
 	/**

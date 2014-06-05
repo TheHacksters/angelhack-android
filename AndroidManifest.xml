@@ -23,6 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="io.github.luiseduardobrito.androidboilerplate.activity.LoginActivity_"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
     </application>
 
 </manifest>

@@ -112,7 +112,9 @@ public class DrawerFragment extends Fragment {
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Fragment#onActivityCreated(android.os.Bundle)
 	 */
 	@Override
@@ -123,8 +125,11 @@ public class DrawerFragment extends Fragment {
 		setHasOptionsMenu(true);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -262,7 +267,9 @@ public class DrawerFragment extends Fragment {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Fragment#onAttach(android.app.Activity)
 	 */
 	@Override
@@ -276,7 +283,9 @@ public class DrawerFragment extends Fragment {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Fragment#onDetach()
 	 */
 	@Override
@@ -285,7 +294,9 @@ public class DrawerFragment extends Fragment {
 		mCallbacks = null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Fragment#onSaveInstanceState(android.os.Bundle)
 	 */
 	@Override
@@ -294,8 +305,12 @@ public class DrawerFragment extends Fragment {
 		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onConfigurationChanged(android.content.res.Configuration)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.app.Fragment#onConfigurationChanged(android.content.res.Configuration
+	 * )
 	 */
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -304,8 +319,11 @@ public class DrawerFragment extends Fragment {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu,
+	 * android.view.MenuInflater)
 	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

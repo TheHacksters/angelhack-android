@@ -38,7 +38,7 @@ public class DrawerItemAdapter extends BaseAdapter {
 	 */
 	@AfterInject
 	void init() {
-		
+
 		// Create items list
 		items = new ArrayList<DrawerItem>();
 

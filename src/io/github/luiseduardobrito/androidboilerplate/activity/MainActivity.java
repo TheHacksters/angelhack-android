@@ -2,6 +2,7 @@ package io.github.luiseduardobrito.androidboilerplate.activity;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
 import io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment;
+import io.github.luiseduardobrito.androidboilerplate.model.User;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -12,6 +13,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -45,6 +47,12 @@ public class MainActivity extends Activity implements
 	@AfterInject
 	void init() {
 
+		User me = User.getCurrent();
+
+		if (me == null) {
+			LoginActivity_.intent(getApplicationContext())
+					.flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
+		}
 	}
 
 	/**
@@ -63,6 +71,13 @@ public class MainActivity extends Activity implements
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment
+	 * .NavigationDrawerCallbacks#onNavigationDrawerItemSelected(int)
+	 */
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
@@ -73,6 +88,9 @@ public class MainActivity extends Activity implements
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
+	/**
+	 * @param number
+	 */
 	public void onSectionAttached(int number) {
 		switch (number) {
 		case 1:
@@ -87,6 +105,11 @@ public class MainActivity extends Activity implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -101,6 +124,9 @@ public class MainActivity extends Activity implements
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Restore actionBar status
+	 */
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -112,6 +138,7 @@ public class MainActivity extends Activity implements
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment {
+
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -129,9 +156,18 @@ public class MainActivity extends Activity implements
 			return fragment;
 		}
 
+		/**
+		 * Constructor
+		 */
 		public PlaceholderFragment() {
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+		 * android.view.ViewGroup, android.os.Bundle)
+		 */
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
@@ -144,6 +180,11 @@ public class MainActivity extends Activity implements
 			return rootView;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.app.Fragment#onAttach(android.app.Activity)
+		 */
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
