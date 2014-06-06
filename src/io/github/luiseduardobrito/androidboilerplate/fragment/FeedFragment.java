@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.androidboilerplate.fragment;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
-import io.github.luiseduardobrito.androidboilerplate.card.BirthCard;
+import io.github.luiseduardobrito.androidboilerplate.card.SimpleThumbnailCard;
 import it.gmariotti.cardslib.library.view.CardView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -14,15 +14,18 @@ import android.app.Fragment;
 public class FeedFragment extends Fragment {
 
 	@ViewById(R.id.card)
-	CardView birthCardView;
+	CardView cardView;
 
 	@AfterViews
 	void initViews() {
 
 		// Create a Card
-		BirthCard birthCard = new BirthCard(getActivity());
+		SimpleThumbnailCard card = new SimpleThumbnailCard(getActivity(),
+				R.drawable.carddemo_ic_gmaps_large);
+		card.setTitle("Welcome!");
+		card.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus odio, accumsan vitae dui in, vulputate laoreet velit. Quisque ac sem suscipit, adipiscing augue non, pharetra nunc. Phasellus sed lobortis nisi.");
 
-		// Set card in the cardView
-		birthCardView.setCard(birthCard);
+		// Show card in view
+		cardView.setCard(card);
 	}
 }

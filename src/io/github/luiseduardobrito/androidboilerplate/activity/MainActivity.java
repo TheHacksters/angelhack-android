@@ -78,7 +78,6 @@ public class MainActivity extends Activity implements
 	public void onNavigationDrawerItemSelected(int position) {
 		FeedFragment fragment = FeedFragment_.builder().build();
 		FragmentManager fragmentManager = getFragmentManager();
-
 		fragmentManager.beginTransaction().replace(R.id.container, fragment)
 				.commit();
 	}
