@@ -2,6 +2,8 @@ package io.github.luiseduardobrito.androidboilerplate.activity;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
 import io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment;
+import io.github.luiseduardobrito.androidboilerplate.fragment.FeedFragment;
+import io.github.luiseduardobrito.androidboilerplate.fragment.FeedFragment_;
 import io.github.luiseduardobrito.androidboilerplate.model.User;
 
 import org.androidannotations.annotations.AfterInject;
@@ -11,16 +13,10 @@ import org.androidannotations.annotations.OptionsMenu;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 @OptionsMenu(R.menu.main)
 @EActivity(R.layout.activity_main)
@@ -80,12 +76,11 @@ public class MainActivity extends Activity implements
 	 */
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		// update the main content by replacing fragments
+		FeedFragment fragment = FeedFragment_.builder().build();
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+
+		fragmentManager.beginTransaction().replace(R.id.container, fragment)
+				.commit();
 	}
 
 	/**
@@ -133,64 +128,4 @@ public class MainActivity extends Activity implements
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		/**
-		 * Returns a new instance of this fragment for the given section number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		/**
-		 * Constructor
-		 */
-		public PlaceholderFragment() {
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
-		 * android.view.ViewGroup, android.os.Bundle)
-		 */
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			TextView textView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			textView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see android.app.Fragment#onAttach(android.app.Activity)
-		 */
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			((MainActivity) activity).onSectionAttached(getArguments().getInt(
-					ARG_SECTION_NUMBER));
-		}
-	}
-
 }

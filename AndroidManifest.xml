@@ -8,6 +8,8 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="io.github.luiseduardobrito.androidboilerplate.App_"
         android:allowBackup="true"
