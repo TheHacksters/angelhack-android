@@ -57,6 +57,7 @@ public class User extends Model {
 	String name;
 	String email;
 	String password;
+	UserGroup group;
 
 	/**
 	 * Constructor
@@ -104,5 +105,14 @@ public class User extends Model {
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * Get user group
+	 * 
+	 * @return group
+	 */
+	public UserGroup getGroup() {
+		return group;
 	}
 }
