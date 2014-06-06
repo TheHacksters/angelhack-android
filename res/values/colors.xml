@@ -1,0 +1,8 @@
+<resources>
+    <color name="black">#0A0A0A</color>
+    <color name="white">#FAFAFA</color>
+    <color name="ice">#d8d8d8</color>
+    <color name="gray">#333333</color>
+    <color name="dark_gray">#EEEEEE</color>
+    <color name="light_gray">#CCCCCC</color>
+</resources>

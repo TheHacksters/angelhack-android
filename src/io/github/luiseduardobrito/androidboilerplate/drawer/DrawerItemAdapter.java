@@ -1,7 +1,6 @@
 package io.github.luiseduardobrito.androidboilerplate.drawer;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
-import io.github.luiseduardobrito.androidboilerplate.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,19 +50,6 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 	 */
 	public void setSelected(Integer position) {
 
-		// Get current user
-		User me = User.getCurrent();
-
-		// Check user item is shown
-		if (me != null) {
-			
-			for (int i = 1; i < items.size(); i++) {
-				items.get(i).setLabelSelected(position.equals(i));
-			}
-			
-			return;
-		}
-
 		// Iterate selecting stuff
 		for (int i = 0; i < items.size(); i++) {
 			items.get(i).setLabelSelected(position.equals(i));
@@ -88,32 +74,10 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 		// Create items list
 		items = new ArrayList<DrawerItem>();
 
-		// Get current user
-		User me = User.getCurrent();
-
-		// Bind drawer user item
-		if (me != null) {
-			DrawerUserItem userItem = DrawerUserItem_.build(context);
-			userItem.bind(me);
-			items.add(userItem);
-		}
-
-		Boolean first = true;
-
 		// Populate drawer items
 		for (String label : drawerItemsLabels) {
-
 			DrawerItem item = DrawerItem_.build(context);
-
-			if (first) {
-				item.bind(label, true);
-				first = false;
-			}
-
-			else {
-				item.bind(label);
-			}
-
+			item.bind(label);
 			items.add(item);
 		}
 

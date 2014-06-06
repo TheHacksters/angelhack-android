@@ -3,6 +3,7 @@ package io.github.luiseduardobrito.androidboilerplate.fragment;
 import io.github.luiseduardobrito.androidboilerplate.R;
 import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter;
 import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter_;
+import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerUserProfile;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -26,8 +27,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
@@ -64,7 +65,10 @@ public class DrawerFragment extends Fragment {
 	ListView mDrawerListView;
 
 	@ViewById(R.id.drawer_content_layout)
-	RelativeLayout mDrawerContentLayout;
+	LinearLayout mDrawerContentLayout;
+
+	@ViewById(R.id.user_profile)
+	DrawerUserProfile profile;
 
 	private DrawerLayout mDrawerLayout;
 	private View mFragmentContainerView;
@@ -94,6 +98,9 @@ public class DrawerFragment extends Fragment {
 	 */
 	@AfterViews
 	void initViews() {
+
+		// Prepare user profile
+		profile.bind("John Doe", "Example Inc.");
 
 		// Select either the default item (0) or the last selected item.
 		selectItem(mCurrentSelectedPosition);
@@ -259,9 +266,9 @@ public class DrawerFragment extends Fragment {
 		mCurrentSelectedPosition = position;
 
 		if (mDrawerListView != null) {
-			
+
 			mDrawerListView.setItemChecked(position, true);
-			
+
 			if (adapter != null) {
 				adapter.setSelected(position);
 			}
