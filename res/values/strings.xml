@@ -47,6 +47,7 @@
     <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_confirm_password">Confirm password</string>
     <string name="action_signin"><b>Sign in</b> with existing account</string>
     <string name="action_signup"><b>Register</b> a new account</string>
     <string name="action_signin_short">Sign in</string>
