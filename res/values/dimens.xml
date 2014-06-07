@@ -11,8 +11,6 @@
     <dimen name="navigation_drawer_width">280dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="drawer_width">240dp</dimen>
     <dimen name="text_size_medium">14sp</dimen>
     <dimen name="demo_title_section_margin">10dp</dimen>
@@ -32,7 +30,7 @@
     <dimen name="carddemo_base_grid_columnwidth">140dp</dimen>
     <dimen name="carddemo_base_grid_columnwidth_card">125dp</dimen>
     <dimen name="carddemo_gplay_grid_columnwidth">140dp</dimen>
-    <dimen name="carddemo_gplay_grid_columnwidth_card">125dp</dimen>
+    <dimen name="carddemo_gplay_grid_columnwidth_card">150dp</dimen>
     <dimen name="carddemo_gricursor_width">125dp</dimen>
     <dimen name="card_rose">250dp</dimen>
 
