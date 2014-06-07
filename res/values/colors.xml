@@ -1,8 +1,8 @@
 <resources>
 
-    <color name="brand">#CDE9CA</color>
-    <color name="dark_brand">#A0CAB5</color>
-    <color name="darker_brand">#80A893</color>
+    <color name="brand">#B2D5D5</color>
+    <color name="dark_brand">#9DBCBC</color>
+    <color name="darker_brand">#7C9595</color>
     <color name="black">#0A0A0A</color>
     <color name="white">#FAFAFA</color>
     <color name="red">#850e0e</color>
