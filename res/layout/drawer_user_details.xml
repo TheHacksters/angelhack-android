@@ -6,7 +6,7 @@
         android:id="@+id/profile_details_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/gray"
+        android:divider="@color/sidebar_divider"
         android:dividerHeight="0.5dp" >
     </ListView>
 

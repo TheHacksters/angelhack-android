@@ -3,7 +3,7 @@
     android:id="@+id/drawer_content_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray"
+    android:background="@color/sidebar_primary"
     android:orientation="vertical"
     tools:context="io.github.luiseduardobrito.angelhack.fragment.DrawerFragment_" >
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:choiceMode="singleChoice"
-        android:divider="@color/gray"
+        android:divider="@color/sidebar_divider"
         android:dividerHeight="0.5dp" />
 
 </LinearLayout>

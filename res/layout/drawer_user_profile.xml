@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_gravity="center_vertical"
-        android:background="@color/dark_gray"
+        android:background="@color/sidebar_primary"
         android:orientation="horizontal"
         android:padding="10dp"
         android:weightSum="10" >
@@ -83,7 +83,7 @@
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/darker_gray" >
+        android:background="@color/sidebar_secondary" >
     </io.github.luiseduardobrito.angelhack.drawer.DrawerUserDetails_>
 
     <View
