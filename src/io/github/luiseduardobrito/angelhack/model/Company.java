@@ -6,6 +6,10 @@ import com.parse.ParseObject;
 @ParseClassName("Company")
 public class Company extends ParseObject {
 
+	public Company() {
+		// Auto-generated constructor stub
+	}
+
 	/**
 	 * Constructor
 	 * 

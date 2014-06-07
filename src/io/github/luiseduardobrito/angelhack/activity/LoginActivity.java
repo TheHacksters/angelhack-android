@@ -1,7 +1,11 @@
 package io.github.luiseduardobrito.angelhack.activity;
 
+import io.github.luiseduardobrito.angelhack.Prefs_;
 import io.github.luiseduardobrito.angelhack.R;
+import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter;
+import io.github.luiseduardobrito.angelhack.exception.AppException;
+import io.github.luiseduardobrito.angelhack.model.User;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +19,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -33,6 +38,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.ParseException;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -41,6 +49,8 @@ import android.widget.TextView;
 @OptionsMenu(R.menu.login)
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
+
+	private static Date birthDateFromPicker;
 
 	public static class DatePickerFragment extends DialogFragment implements
 			DatePickerDialog.OnDateSetListener {
@@ -63,7 +73,11 @@ public class LoginActivity extends Activity {
 						@Override
 						public void onDateSet(DatePicker view, int year,
 								int monthOfYear, int dayOfMonth) {
-
+							Calendar cal = Calendar.getInstance();
+							cal.set(Calendar.YEAR, year);
+							cal.set(Calendar.MONTH, monthOfYear);
+							cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+							birthDateFromPicker = cal.getTime();
 						}
 
 					}, year, month, day);
@@ -76,6 +90,11 @@ public class LoginActivity extends Activity {
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
 
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.MONTH, monthOfYear);
+			cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+			birthDateFromPicker = cal.getTime();
 		}
 	}
 
@@ -87,6 +106,9 @@ public class LoginActivity extends Activity {
 
 	@Bean
 	DrawerItemAdapter drawerAdapter;
+
+	@Pref
+	Prefs_ prefs;
 
 	/**
 	 * UI references
@@ -105,6 +127,9 @@ public class LoginActivity extends Activity {
 
 	@ViewById(R.id.signup_password)
 	EditText mSignupPasswordView;
+
+	@ViewById(R.id.signup_confirm_password)
+	EditText mSignupConfirmPasswordView;
 
 	@ViewById(R.id.login_form)
 	View mLoginFormView;
@@ -142,7 +167,7 @@ public class LoginActivity extends Activity {
 				});
 
 		// Set password editor action listener
-		mSignupPasswordView
+		mSignupConfirmPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView v, int actionId,
@@ -179,8 +204,11 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void run() {
-				drawerAdapter.update();
-				showProgress(false);
+
+				String email = mEmailView.getText().toString();
+				String password = mPasswordView.getText().toString();
+
+				performLogin(email, password);
 			}
 
 		}, animTime);
@@ -192,6 +220,11 @@ public class LoginActivity extends Activity {
 	@Background
 	void performLogin(String email, String password) {
 
+		try {
+			showResult((User) User.logIn(email, password));
+		} catch (ParseException e) {
+			showError(e);
+		}
 	}
 
 	/**
@@ -216,8 +249,18 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void run() {
-				drawerAdapter.update();
-				showProgress(false);
+
+				String name = mSignupNameView.getText().toString();
+				String email = mSignupEmailView.getText().toString();
+				String password = mSignupPasswordView.getText().toString();
+				String confirmPassword = mSignupConfirmPasswordView.getText()
+						.toString();
+
+				if (password.equals(confirmPassword)) {
+					performSignup(name, email, password, birthDateFromPicker);
+				} else {
+					showError("Password and its confirmation must match");
+				}
 			}
 
 		}, animTime);
@@ -235,6 +278,69 @@ public class LoginActivity extends Activity {
 	@Background
 	void performSignup(String name, String email, String password, Date birthDay) {
 
+		if (birthDateFromPicker == null) {
+			showError("Birth date not specified");
+			return;
+		}
+
+		try {
+			showResult(User.signUp(name, email, password, birthDateFromPicker));
+		} catch (ParseException e) {
+			showError(e);
+		} catch (AppException e) {
+			showError(e);
+		}
+	}
+
+	/**
+	 * Show auth result based on User
+	 * 
+	 * @param e
+	 */
+	@UiThread
+	void showResult(User user) {
+
+		prefs.email().put(user.getEmail());
+		UserState.getInstance().update();
+
+		drawerAdapter.update();
+		showProgress(false);
+
+		this.finish();
+	}
+
+	/**
+	 * Show auth error based on ParseException
+	 * 
+	 * @param e
+	 */
+	@UiThread
+	void showError(ParseException e) {
+		showError(e.getMessage());
+	}
+
+	/**
+	 * Show auth error based on AppException
+	 * 
+	 * @param e
+	 */
+	@UiThread
+	void showError(AppException e) {
+		showError(e.getMessage());
+	}
+
+	/**
+	 * Show auth error based on string
+	 * 
+	 * @param e
+	 */
+	@UiThread
+	void showError(String msg) {
+
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+		drawerAdapter.update();
+		showProgress(false);
 	}
 
 	/**

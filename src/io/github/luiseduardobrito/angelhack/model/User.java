@@ -18,15 +18,16 @@ public class User extends ParseUser {
 
 	public static final int MIN_PASSWORD_LENGTH = 6;
 
-	public static User instance;
+	public static User signUp(String name, String email, String password,
+			Date birthDay) throws AppException, ParseException {
+		return new User(name, email, password, birthDay);
+	}
 
-	/**
-	 * Get current user instance
-	 * 
-	 * @return
+	/*
+	 * Constructor
 	 */
-	public static User getCurrent() {
-		return instance;
+	public User() {
+		// Auto-generated constructor stub
 	}
 
 	/**
@@ -36,20 +37,21 @@ public class User extends ParseUser {
 	 * @param email
 	 * @param password
 	 * @throws AppException
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	public User(String name, String email, String password, Date birthDay)
 			throws AppException, ParseException {
-
-		// Set user fields
-		setName(name);
-		setEmail(email);
-		put("birthDay", birthDay);
 
 		// Check password length
 		if (password.isEmpty() || password.length() < MIN_PASSWORD_LENGTH) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD);
 		}
+
+		// Set user fields
+		setName(name);
+		setUsername(email);
+		setEmail(email);
+		put("birthDay", birthDay);
 
 		// Set user password
 		setPassword(password);
@@ -63,7 +65,6 @@ public class User extends ParseUser {
 	 */
 	public void setName(String name) {
 		put("name", name);
-		saveEventually();
 	}
 
 	/**

@@ -1,8 +1,14 @@
 package io.github.luiseduardobrito.angelhack.drawer;
 
 import io.github.luiseduardobrito.angelhack.R;
+import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.model.User;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
@@ -14,7 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 @EViewGroup(R.layout.drawer_user_profile)
-public class DrawerUserProfile extends LinearLayout {
+public class DrawerUserProfile extends LinearLayout implements Observer {
+
+	UserState userState = UserState.getInstance();
 
 	/**
 	 * UI References
@@ -62,36 +70,37 @@ public class DrawerUserProfile extends LinearLayout {
 	 */
 	public DrawerUserProfile(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+
 	}
 
 	/**
-	 * Bind user to drawer item
-	 * 
-	 * @param user
+	 * Initialize after annotations injection
 	 */
-	public void bind(User user) {
-		bind(user.getName(), "Example Inc.");
+	@AfterInject
+	void init() {
+		userState.addObserver(this);
+	}
+
+	/**
+	 * Initialize after annotations views
+	 */
+	@AfterViews
+	void initViews() {
+		update(null, null);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItem#bind(
-	 * java.lang.String)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
-	public void bind(String label) {
-		this.name.setText(label);
-	}
+	@Override
+	public void update(Observable observable, Object data) {
 
-	/**
-	 * Bind user name and group
-	 * 
-	 * @param label
-	 * @param group
-	 */
-	public void bind(String label, String group) {
-		this.name.setText(label);
-		this.group.setText(group);
+		User current = userState.getCurrent();
+
+		if (current != null) {
+			name.setText(current.getName());
+		}
 	}
 }

@@ -113,9 +113,6 @@ public class DrawerFragment extends Fragment {
 	@AfterViews
 	void initViews() {
 
-		// Prepare user profile
-		profile.bind("John Doe", "Example Inc.");
-
 		// Select either the default item (0) or the last selected item.
 		selectItem(mCurrentSelectedPosition);
 
