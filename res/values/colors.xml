@@ -15,6 +15,7 @@
     <color name="dark_green">#508b4b</color>
     <color name="sidebar_primary">#061b28</color>
     <color name="sidebar_secondary">#222222</color>
+    <color name="sidebar_profile">#061b28</color>
     <color name="sidebar_divider">#333333</color>
 
 </resources>

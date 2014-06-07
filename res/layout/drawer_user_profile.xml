@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_gravity="center_vertical"
-        android:background="@color/sidebar_primary"
+        android:background="@color/sidebar_profile"
         android:orientation="horizontal"
         android:padding="10dp"
         android:weightSum="10" >
