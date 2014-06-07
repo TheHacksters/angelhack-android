@@ -1,10 +1,8 @@
 package io.github.luiseduardobrito.androidboilerplate.drawer;
 
 import io.github.luiseduardobrito.androidboilerplate.R;
-import io.github.luiseduardobrito.androidboilerplate.anim.ResizeAnimation;
 import io.github.luiseduardobrito.androidboilerplate.model.User;
 
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
@@ -95,43 +93,5 @@ public class DrawerUserProfile extends LinearLayout {
 	public void bind(String label, String group) {
 		this.name.setText(label);
 		this.group.setText(group);
-	}
-
-	Boolean detailState = false;
-
-	@Click(R.id.more)
-	void more() {
-
-		int duration = 600;
-
-		less.setVisibility(View.VISIBLE);
-		more.setVisibility(View.GONE);
-		detailState = false;
-
-		int width = details.getWidth();
-		int height = details.getHeight();
-
-		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
-				height, width, 264);
-		resizeAnimation.setDuration(duration);
-		details.startAnimation(resizeAnimation);
-	}
-
-	@Click(R.id.less)
-	void less() {
-
-		int duration = 600;
-
-		less.setVisibility(View.GONE);
-		more.setVisibility(View.VISIBLE);
-		detailState = true;
-
-		int width = details.getWidth();
-		int height = details.getHeight();
-
-		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
-				height, width, 0);
-		resizeAnimation.setDuration(duration);
-		details.startAnimation(resizeAnimation);
 	}
 }
