@@ -6,6 +6,7 @@ import io.github.luiseduardobrito.angelhack.exception.ErrorCode;
 import java.util.Date;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 /**
@@ -35,9 +36,10 @@ public class User extends ParseUser {
 	 * @param email
 	 * @param password
 	 * @throws AppException
+	 * @throws ParseException 
 	 */
 	public User(String name, String email, String password, Date birthDay)
-			throws AppException {
+			throws AppException, ParseException {
 
 		// Set user fields
 		setName(name);
@@ -51,6 +53,7 @@ public class User extends ParseUser {
 
 		// Set user password
 		setPassword(password);
+		signUp();
 	}
 
 	/**
