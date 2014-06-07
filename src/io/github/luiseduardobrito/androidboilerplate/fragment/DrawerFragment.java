@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.androidboilerplate.fragment;
 
-import io.github.luiseduardobrito.androidboilerplate.ProfileActivity;
 import io.github.luiseduardobrito.androidboilerplate.R;
+import io.github.luiseduardobrito.androidboilerplate.activity.ProfileActivity;
 import io.github.luiseduardobrito.androidboilerplate.anim.ResizeAnimation;
 import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter;
 import io.github.luiseduardobrito.androidboilerplate.drawer.DrawerItemAdapter_;

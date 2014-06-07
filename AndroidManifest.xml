@@ -40,7 +40,7 @@
                 android:value="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_" />
         </activity>
         <activity
-            android:name="io.github.luiseduardobrito.androidboilerplate.ProfileActivity"
+            android:name="io.github.luiseduardobrito.androidboilerplate.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:parentActivityName="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
             android:theme="@style/AppTheme" >

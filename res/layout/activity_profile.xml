@@ -4,4 +4,4 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.luiseduardobrito.androidboilerplate.ProfileActivity" />
+    tools:context="io.github.luiseduardobrito.androidboilerplate.activity.ProfileActivity" />
