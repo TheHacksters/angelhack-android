@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_" >
+    tools:context="io.github.luiseduardobrito.angelhack.activity.MainActivity_" >
 
     <!--
          As the main content view, the view below consumes the entire
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="io.github.luiseduardobrito.androidboilerplate.fragment.DrawerFragment_"
+        android:name="io.github.luiseduardobrito.angelhack.fragment.DrawerFragment_"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start" />

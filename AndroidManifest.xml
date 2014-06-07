@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.luiseduardobrito.androidboilerplate"
+    package="io.github.luiseduardobrito.angelhack"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="0.0.1" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -11,13 +11,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="io.github.luiseduardobrito.androidboilerplate.App_"
+        android:name="io.github.luiseduardobrito.angelhack.App_"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
+            android:name="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -29,24 +29,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.github.luiseduardobrito.androidboilerplate.activity.LoginActivity_"
+            android:name="io.github.luiseduardobrito.angelhack.activity.LoginActivity_"
             android:label="@string/title_activity_login"
-            android:parentActivityName="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_" />
+                android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
         </activity>
         <activity
-            android:name="io.github.luiseduardobrito.androidboilerplate.activity.ProfileActivity"
+            android:name="io.github.luiseduardobrito.angelhack.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:parentActivityName="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_"
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
             android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_" />
+                android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
         </activity>
     </application>
 
