@@ -1,14 +1,12 @@
 package io.github.luiseduardobrito.angelhack.fragment;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.anim.ResizeAnimation;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter_;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerUserProfile;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 

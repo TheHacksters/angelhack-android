@@ -75,6 +75,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
         </activity>
+        <activity
+            android:name="io.github.luiseduardobrito.angelhack.CreateCompanyActivity_"
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
+        </activity>
     </application>
 
 </manifest>

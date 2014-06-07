@@ -1,6 +1,7 @@
 package io.github.luiseduardobrito.angelhack.model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 @ParseClassName("Company")
@@ -14,9 +15,12 @@ public class Company extends ParseObject {
 	 * Constructor
 	 * 
 	 * @param name
+	 * @throws ParseException
 	 */
-	public Company(String name) {
+	public Company(String name, User admin) throws ParseException {
 		setName(name);
+		setAdmin(admin);
+		save();
 	}
 
 	/**

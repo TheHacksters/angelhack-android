@@ -3,14 +3,14 @@
     android:id="@+id/drawer_content_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/dark_gray"
     android:orientation="vertical"
     tools:context="io.github.luiseduardobrito.angelhack.fragment.DrawerFragment_" >
 
     <io.github.luiseduardobrito.angelhack.drawer.DrawerUserProfile_
         android:id="@+id/user_profile"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
     </io.github.luiseduardobrito.angelhack.drawer.DrawerUserProfile_>
 
     <ListView
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" />
+        android:divider="@color/gray"
+        android:dividerHeight="0.5dp" />
 
 </LinearLayout>

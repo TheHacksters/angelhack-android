@@ -1,8 +1,13 @@
 package io.github.luiseduardobrito.angelhack.drawer;
 
+import io.github.luiseduardobrito.angelhack.CreateCompanyActivity_;
 import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.activity.ProfileActivity;
+import io.github.luiseduardobrito.angelhack.model.Company;
+import io.github.luiseduardobrito.angelhack.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,13 +23,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.parse.ParseException;
+
 @EBean(scope = Scope.Singleton)
 public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 		Observer {
 
 	UserState userState = UserState.getInstance();
-
-	String[] labels = { "Perfil", "Company 1", "Company 2" };
+	List<String> labels;
 
 	@RootContext
 	Context context;
@@ -32,21 +38,22 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 	@AfterInject
 	void init() {
 		userState.addObserver(this);
+		update(null, null);
 	}
 
 	@Override
 	public int getCount() {
-		return labels.length;
+		return labels.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return labels[position];
+		return labels.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override
@@ -62,8 +69,8 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 			item = DrawerUserDetailsItem_.build(context);
 		}
 
-		switch (position) {
-		case 0:
+		if (position == 0) {
+
 			item.bind((String) getItem(position), new OnClickListener() {
 
 				@Override
@@ -73,11 +80,21 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 					context.startActivity(i);
 				}
 			});
+		}
 
-			break;
-		default:
+		else if (position == getCount() - 1) {
+			item.bind((String) getItem(position), new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					CreateCompanyActivity_.intent(context)
+							.flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
+				}
+			});
+		}
+
+		else {
 			item.bind((String) getItem(position));
-			break;
 		}
 
 		return item;
@@ -85,6 +102,26 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 
 	@Override
 	public void update(Observable observable, Object data) {
-		// TODO
+
+		labels = new ArrayList<String>();
+		labels.add("Profile");
+		
+		User me = userState.getCurrent();
+
+		try {
+			if (me != null && me.getCompanies() != null) {
+
+				for (Company company : userState.getCurrent().getCompanies()) {
+					company.fetchIfNeeded();
+					labels.add(company.getName());
+
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		labels.add("Create a new company");
+
 	}
 }

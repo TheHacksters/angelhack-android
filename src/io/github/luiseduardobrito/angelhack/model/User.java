@@ -4,6 +4,7 @@ import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.exception.ErrorCode;
 
 import java.util.Date;
+import java.util.List;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -101,5 +102,21 @@ public class User extends ParseUser {
 	 */
 	public Date getBirthDay() {
 		return getDate("birthDay");
+	}
+
+	/**
+	 * Add user to a company
+	 * 
+	 * @param company
+	 * @throws ParseException
+	 */
+	public void addCompany(Company company) throws ParseException {
+		add("companies", company);
+		save();
+	}
+
+	public List<Company> getCompanies() throws ParseException {
+		fetchIfNeeded();
+		return getList("companies");
 	}
 }

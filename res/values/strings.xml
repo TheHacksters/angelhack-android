@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- App General Strings -->
     <string name="app_name">mingl</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
-
-    <!-- Parse Auth Strings -->
     <string name="parse_app_id">6jzH3my3Ty5KlVCWBIAyUTzYJwFEzG9KNXp6RYTC</string>
     <string name="parse_app_secret">9Q3cqztyphOXA2nEpXoFXw9NbcB1PylzBtBYl3Tn</string>
-
-    <!-- App Common Strings -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="continue_label">Continue</string>
@@ -19,32 +14,25 @@
     <string name="previous">Previous</string>
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>
-
-    <!-- App General Errors -->
     <string name="unknown_exception">Unknown exception</string>
     <string name="unknown_runtime_exception">Unknown runtime exception</string>
 
-    <!-- App Drawer Items labels -->
     <string-array name="drawer_items">
         <item>Dashboard</item>
         <item>Preferences</item>
     </string-array>
 
-    <!-- App Validation Errors -->
     <string name="invalid_field">Invalid field</string>
     <string name="invalid_name">Invalid name</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
     <string name="invalid_password_length">Password should be at least %1$s characters long</string>
     <string name="invalid_password_confirmation">Confirmation and password don\'t match</string>
-
-    <!-- App Authentication Errors -->
     <string name="auth_unknown">Unknown auth error</string>
     <string name="auth_invalid_info">Invalid authentication information</string>
-
-    <!-- App Login Activity -->
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_name">Name</string>
+    <string name="prompt_company_name">Company name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_confirm_password">Confirm password</string>
@@ -54,6 +42,7 @@
     <string name="action_signup_short">Sign up</string>
     <string name="action_birthday">Select your birthday</string>
     <string name="action_forgot_password">Recover lost password</string>
+    <string name="action_create_company"><b>Create</b> new company</string>
     <string name="login_progress_signing_in">Signing in&#8230;</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -61,5 +50,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_create_company">CreateCompanyActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

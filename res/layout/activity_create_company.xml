@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    style="@style/LoginFormContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="io.github.luiseduardobrito.angelhack.CreateCompanyActivity" >
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableLeft="@drawable/ic_user"
+        android:drawablePadding="12dp"
+        android:hint="@string/prompt_company_name"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/create_company_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button_bg"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:text="@string/action_create_company"
+        android:textColor="@color/white" />
+
+</LinearLayout>
