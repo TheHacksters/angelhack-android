@@ -7,7 +7,7 @@
         style="@android:style/TextAppearance.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_more"
+        android:drawableLeft="@drawable/ic_profile"
         android:text="Ver perfil"
         android:textColor="@color/white" />
 

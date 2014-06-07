@@ -272,20 +272,6 @@ public class DrawerFragment extends Fragment {
 					return;
 				}
 
-				int duration = 350;
-
-				less.setVisibility(View.GONE);
-				more.setVisibility(View.VISIBLE);
-				detailState = true;
-
-				int width = details.getWidth();
-				int height = details.getHeight();
-
-				ResizeAnimation resizeAnimation = new ResizeAnimation(details,
-						width, height, width, 0);
-				resizeAnimation.setDuration(duration);
-				details.startAnimation(resizeAnimation);
-
 				getActivity().invalidateOptionsMenu(); // calls
 														// onPrepareOptionsMenu()
 			}
