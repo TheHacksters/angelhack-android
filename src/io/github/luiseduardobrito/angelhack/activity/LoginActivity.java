@@ -24,7 +24,6 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,7 +33,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -44,8 +42,8 @@ import android.widget.TimePicker;
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
 
-	public static class TimePickerFragment extends DialogFragment implements
-			TimePickerDialog.OnTimeSetListener {
+	public static class DatePickerFragment extends DialogFragment implements
+			DatePickerDialog.OnDateSetListener {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -74,8 +72,10 @@ public class LoginActivity extends Activity {
 			return dialog;
 		}
 
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			// Do something with the time chosen by the user
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+
 		}
 	}
 
@@ -225,7 +225,7 @@ public class LoginActivity extends Activity {
 
 	@Click(R.id.birthday_button)
 	void showBirthdayPicker() {
-		DialogFragment newFragment = new TimePickerFragment();
+		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getFragmentManager(), "timePicker");
 	}
 
