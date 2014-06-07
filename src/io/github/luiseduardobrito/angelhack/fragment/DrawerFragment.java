@@ -1,7 +1,6 @@
 package io.github.luiseduardobrito.angelhack.fragment;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.activity.ProfileActivity;
 import io.github.luiseduardobrito.angelhack.anim.ResizeAnimation;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter_;
@@ -16,7 +15,6 @@ import org.androidannotations.annotations.ViewById;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -128,53 +126,6 @@ public class DrawerFragment extends Fragment {
 		adapter = DrawerItemAdapter_.getInstance_(getActivity());
 		mDrawerListView.setAdapter(adapter);
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-	}
-
-	/**
-	 * Open profile details
-	 */
-	@Click(R.id.profile_details)
-	void profileDetails() {
-		Intent intent = new Intent(getActivity(), ProfileActivity.class);
-		startActivity(intent);
-	}
-
-	Boolean detailState = false;
-
-	@Click(R.id.more)
-	void more() {
-
-		int duration = 600;
-
-		less.setVisibility(View.VISIBLE);
-		more.setVisibility(View.GONE);
-		detailState = false;
-
-		int width = details.getWidth();
-		int height = details.getHeight();
-
-		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
-				height, width, 264);
-		resizeAnimation.setDuration(duration);
-		details.startAnimation(resizeAnimation);
-	}
-
-	@Click(R.id.less)
-	void less() {
-
-		int duration = 600;
-
-		less.setVisibility(View.GONE);
-		more.setVisibility(View.VISIBLE);
-		detailState = true;
-
-		int width = details.getWidth();
-		int height = details.getHeight();
-
-		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
-				height, width, 0);
-		resizeAnimation.setDuration(duration);
-		details.startAnimation(resizeAnimation);
 	}
 
 	/*

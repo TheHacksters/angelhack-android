@@ -36,6 +36,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:color">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="Drawer.Profile.Group" parent="@android:style/TextAppearance.Small.Inverse">

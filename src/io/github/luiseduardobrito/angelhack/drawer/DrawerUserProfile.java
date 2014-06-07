@@ -2,6 +2,8 @@ package io.github.luiseduardobrito.angelhack.drawer;
 
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.UserState;
+import io.github.luiseduardobrito.angelhack.activity.ProfileActivity;
+import io.github.luiseduardobrito.angelhack.anim.ResizeAnimation;
 import io.github.luiseduardobrito.angelhack.model.User;
 
 import java.util.Observable;
@@ -9,14 +11,17 @@ import java.util.Observer;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 @EViewGroup(R.layout.drawer_user_profile)
@@ -41,6 +46,11 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 
 	@ViewById(R.id.details)
 	View details;
+
+	@ViewById(R.id.profile_details_list)
+	ListView profileDetailsList;
+
+	Boolean detailState = false;
 
 	/**
 	 * Constructor
@@ -102,5 +112,55 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 		if (current != null) {
 			name.setText(current.getName());
 		}
+	}
+
+	@Click(R.id.avatar)
+	void avatar() {
+		Intent i = new Intent(getContext(), ProfileActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getContext().startActivity(i);
+	}
+
+	@Click(R.id.avatar_layout)
+	void avatarLayout() {
+		avatar();
+	}
+
+	@Click(R.id.more)
+	void more() {
+
+		int duration = 600;
+
+		less.setVisibility(View.VISIBLE);
+		more.setVisibility(View.GONE);
+		detailState = false;
+
+		int width = details.getWidth();
+		int height = details.getHeight();
+
+		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
+				height, width, 264);
+		resizeAnimation.setDuration(duration);
+		details.startAnimation(resizeAnimation);
+	}
+
+	@Click(R.id.less)
+	void less() {
+
+		int duration = 600;
+
+		less.setVisibility(View.GONE);
+		more.setVisibility(View.VISIBLE);
+		detailState = true;
+
+		int width = details.getWidth();
+		int height = details.getHeight();
+
+		profileDetailsList.getMeasuredHeight();
+
+		ResizeAnimation resizeAnimation = new ResizeAnimation(details, width,
+				height, width, 0);
+		resizeAnimation.setDuration(duration);
+		details.startAnimation(resizeAnimation);
 	}
 }
