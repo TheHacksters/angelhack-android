@@ -2,10 +2,12 @@ package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.drawer.DrawerItemAdapter;
-import io.github.luiseduardobrito.angelhack.exception.AppException;
-import io.github.luiseduardobrito.angelhack.model.User;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -18,13 +20,21 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -34,10 +44,45 @@ import android.widget.TextView;
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
 
+	public static class TimePickerFragment extends DialogFragment implements
+			TimePickerDialog.OnTimeSetListener {
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+			// Use the current time as the default values for the picker
+
+			final Calendar c = Calendar.getInstance();
+
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+
+			// Create a new instance of TimePickerDialog and return it
+			DatePickerDialog dialog = new DatePickerDialog(getActivity(),
+					new OnDateSetListener() {
+
+						@Override
+						public void onDateSet(DatePicker view, int year,
+								int monthOfYear, int dayOfMonth) {
+
+						}
+
+					}, year, month, day);
+
+			dialog.getDatePicker().setMaxDate(new Date().getTime());
+			return dialog;
+		}
+
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			// Do something with the time chosen by the user
+		}
+	}
+
 	/**
 	 * Extra email from Intent
 	 */
-	@Extra("io.github.luiseduardobrito.androidboilerplate.EMAIL")
+	@Extra("io.github.luiseduardobrito.angelhack.EMAIL")
 	String mExtraEmail;
 
 	@Bean
@@ -51,6 +96,15 @@ public class LoginActivity extends Activity {
 
 	@ViewById(R.id.password)
 	EditText mPasswordView;
+
+	@ViewById(R.id.signup_name)
+	EditText mSignupNameView;
+
+	@ViewById(R.id.signup_email)
+	EditText mSignupEmailView;
+
+	@ViewById(R.id.signup_password)
+	EditText mSignupPasswordView;
 
 	@ViewById(R.id.login_form)
 	View mLoginFormView;
@@ -69,6 +123,7 @@ public class LoginActivity extends Activity {
 
 		// Set extra email
 		mEmailView.setText(mExtraEmail);
+		mSignupEmailView.setText(mExtraEmail);
 
 		// Set password editor action listener
 		mPasswordView
@@ -78,7 +133,23 @@ public class LoginActivity extends Activity {
 							KeyEvent event) {
 						if (actionId == R.id.login
 								|| actionId == EditorInfo.IME_NULL) {
+
 							attemptLogin();
+							return true;
+						}
+						return false;
+					}
+				});
+
+		// Set password editor action listener
+		mSignupPasswordView
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == R.id.login
+								|| actionId == EditorInfo.IME_NULL) {
+							attemptSignup();
 							return true;
 						}
 						return false;
@@ -91,14 +162,15 @@ public class LoginActivity extends Activity {
 	 * If there are form errors (invalid email, missing fields, etc.), the
 	 * errors are presented and no actual login attempt is made.
 	 */
-	@Click(R.id.sign_in_button)
+	@UiThread
+	@Click(R.id.signin_button)
 	void attemptLogin() {
 
 		// Get short time animation
-		int animTime = getResources().getInteger(
-				android.R.integer.config_mediumAnimTime);
+		final int animTime = getResources().getInteger(
+				android.R.integer.config_mediumAnimTime) * 5;
 
-		// Show progress animation
+		// Show login progress
 		showProgress(true);
 
 		// Prepare handler to call sign in
@@ -107,20 +179,62 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void run() {
-
-				try {
-					User.signUp("Luis Eduardo Brito",
-							"luiseduardo14@gmail.com", "luisluis");
-					LoginActivity.this.finish();
-					drawerAdapter.update();
-
-				} catch (AppException e) {
-					e.printStackTrace();
-				}
+				drawerAdapter.update();
 				showProgress(false);
 			}
 
-		}, animTime * 3);
+		}, animTime);
+	}
+
+	/**
+	 * Perform login in background
+	 */
+	@Background
+	void performLogin(String email, String password) {
+
+	}
+
+	/**
+	 * Attempts to register the account specified by the login form. If there
+	 * are form errors (invalid email, missing fields, etc.), the errors are
+	 * presented and no actual login attempt is made.
+	 */
+	@UiThread
+	@Click(R.id.signup_button)
+	void attemptSignup() {
+
+		// Get short time animation
+		final int animTime = getResources().getInteger(
+				android.R.integer.config_mediumAnimTime) * 5;
+
+		// Show login progress
+		showProgress(true);
+
+		// Prepare handler to call sign in
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				drawerAdapter.update();
+				showProgress(false);
+			}
+
+		}, animTime);
+	}
+
+	@Click(R.id.birthday_button)
+	void showBirthdayPicker() {
+		DialogFragment newFragment = new TimePickerFragment();
+		newFragment.show(getFragmentManager(), "timePicker");
+	}
+
+	/**
+	 * Perform login in background
+	 */
+	@Background
+	void performSignup(String name, String email, String password, Date birthDay) {
+
 	}
 
 	/**

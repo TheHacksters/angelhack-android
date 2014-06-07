@@ -2,9 +2,6 @@ package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.fragment.PlaceholderFragment_;
-
-import java.util.Locale;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -133,16 +130,7 @@ public class ProfileActivity extends Activity implements ActionBar.TabListener {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
+			return getString(R.string.app_name);
 		}
 	}
 }

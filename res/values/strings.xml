@@ -2,13 +2,14 @@
 <resources>
 
     <!-- App General Strings -->
-    <string name="app_name">androidboilerplate</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="app_name">mingl</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
+
+    <!-- Parse Auth Strings -->
+    <string name="parse_app_id">6jzH3my3Ty5KlVCWBIAyUTzYJwFEzG9KNXp6RYTC</string>
+    <string name="parse_app_secret">9Q3cqztyphOXA2nEpXoFXw9NbcB1PylzBtBYl3Tn</string>
 
     <!-- App Common Strings -->
     <string name="ok">OK</string>
@@ -43,10 +44,14 @@
 
     <!-- App Login Activity -->
     <string name="title_activity_login">Sign in</string>
+    <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in_register"><b>Sign in</b> or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_signin"><b>Sign in</b> with existing account</string>
+    <string name="action_signup"><b>Register</b> a new account</string>
+    <string name="action_signin_short">Sign in</string>
+    <string name="action_signup_short">Sign up</string>
+    <string name="action_birthday">Select your birthday</string>
     <string name="action_forgot_password">Recover lost password</string>
     <string name="login_progress_signing_in">Signing in&#8230;</string>
     <string name="error_invalid_email">This email address is invalid</string>

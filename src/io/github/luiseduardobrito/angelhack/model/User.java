@@ -3,11 +3,17 @@ package io.github.luiseduardobrito.angelhack.model;
 import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.exception.ErrorCode;
 
+import java.util.Date;
+
+import com.parse.ParseClassName;
+import com.parse.ParseUser;
+
 /**
  * @author luiseduardobrito
  * 
  */
-public class User extends Model {
+@ParseClassName("_User")
+public class User extends ParseUser {
 
 	public static final int MIN_PASSWORD_LENGTH = 6;
 
@@ -23,43 +29,6 @@ public class User extends Model {
 	}
 
 	/**
-	 * Log in new user instance
-	 * 
-	 * @param email
-	 * @param password
-	 * @return
-	 * @throws AppException
-	 */
-	public static User logIn(String email, String password) throws AppException {
-
-		if (instance.email.equals(email) && instance.password.equals(password)) {
-			return instance;
-		}
-
-		throw new AppException(ErrorCode.AUTH_INVALID_INFO);
-	}
-
-	/**
-	 * Sign up new user instance
-	 * 
-	 * @param name
-	 * @param email
-	 * @param password
-	 * @return
-	 * @throws AppException
-	 */
-	public static User signUp(String name, String email, String password)
-			throws AppException {
-		instance = new User(name, email, password);
-		return instance;
-	}
-
-	String name;
-	String email;
-	String password;
-	UserGroup group;
-
-	/**
 	 * Constructor
 	 * 
 	 * @param name
@@ -67,16 +36,21 @@ public class User extends Model {
 	 * @param password
 	 * @throws AppException
 	 */
-	public User(String name, String email, String password) throws AppException {
+	public User(String name, String email, String password, Date birthDay)
+			throws AppException {
 
-		// Prepare string fields
-		this.name = name;
-		this.email = email;
+		// Set user fields
+		setName(name);
+		setEmail(email);
+		put("birthDay", birthDay);
 
 		// Check password length
 		if (password.isEmpty() || password.length() < MIN_PASSWORD_LENGTH) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD);
 		}
+
+		// Set user password
+		setPassword(password);
 	}
 
 	/**
@@ -85,8 +59,8 @@ public class User extends Model {
 	 * @param name
 	 */
 	public void setName(String name) {
-		this.name = name;
-		this.setChangeAndNotify();
+		put("name", name);
+		saveEventually();
 	}
 
 	/**
@@ -95,7 +69,7 @@ public class User extends Model {
 	 * @return name
 	 */
 	public String getName() {
-		return name;
+		return getString("name");
 	}
 
 	/**
@@ -104,7 +78,7 @@ public class User extends Model {
 	 * @return email
 	 */
 	public String getEmail() {
-		return email;
+		return super.getEmail();
 	}
 
 	/**
@@ -112,7 +86,16 @@ public class User extends Model {
 	 * 
 	 * @return group
 	 */
-	public UserGroup getGroup() {
-		return group;
+	public Company getGroup() {
+		return (Company) getParseObject("group");
+	}
+
+	/**
+	 * Get user birthday
+	 * 
+	 * @return birthDay
+	 */
+	public Date getBirthDay() {
+		return getDate("birthDay");
 	}
 }
