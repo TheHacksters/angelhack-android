@@ -7,6 +7,7 @@ import org.androidannotations.annotations.ViewById;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,17 @@ public class DrawerItem extends RelativeLayout {
 	 */
 	public void bind(String label) {
 		bind(label, false);
+		this.label.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+	}
+
+	/**
+	 * Bind label to item
+	 * 
+	 * @param label
+	 */
+	public void bind(String label, Drawable left) {
+		bind(label, false);
+		this.label.setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
 	}
 
 	/**

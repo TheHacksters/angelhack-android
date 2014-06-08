@@ -30,6 +30,9 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 	@StringArrayRes(R.array.drawer_items)
 	String[] drawerItemsLabels;
 
+	@StringArrayRes(R.array.drawer_items_icons)
+	String[] drawerItemsIcons;
+
 	/**
 	 * Drawer items list
 	 */
@@ -75,9 +78,13 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 		items = new ArrayList<DrawerItem>();
 
 		// Populate drawer items
-		for (String label : drawerItemsLabels) {
+		for (int i = 0; i < drawerItemsLabels.length; i++) {
+
 			DrawerItem item = DrawerItem_.build(context);
-			item.bind(label);
+			String label = drawerItemsLabels[i];
+			int drawableRes = getResourceByName(drawerItemsIcons[i]);
+			item.bind(label, context.getResources().getDrawable(drawableRes));
+
 			items.add(item);
 		}
 
@@ -125,5 +132,14 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		DrawerItem item = items.get(position);
 		return item;
+	}
+
+	private int getResourceByName(String name) {
+		try {
+			return R.drawable.class.getField(name).getInt(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return R.drawable.ic_events;
+		}
 	}
 }

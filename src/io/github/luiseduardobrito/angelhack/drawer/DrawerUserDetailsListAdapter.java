@@ -1,6 +1,7 @@
 package io.github.luiseduardobrito.angelhack.drawer;
 
 import io.github.luiseduardobrito.angelhack.CreateCompanyActivity_;
+import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.activity.ProfileActivity;
 import io.github.luiseduardobrito.angelhack.model.Company;
@@ -79,7 +80,7 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					context.startActivity(i);
 				}
-			});
+			}, context.getResources().getDrawable(R.drawable.ic_profile));
 		}
 
 		else if (position == getCount() - 1) {
@@ -90,11 +91,12 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 					CreateCompanyActivity_.intent(context)
 							.flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
 				}
-			});
+			}, context.getResources().getDrawable(R.drawable.ic_add_company));
 		}
 
 		else {
-			item.bind((String) getItem(position));
+			item.bind((String) getItem(position), context.getResources()
+					.getDrawable(R.drawable.ic_company));
 		}
 
 		return item;
@@ -105,7 +107,7 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 
 		labels = new ArrayList<String>();
 		labels.add("Profile");
-		
+
 		User me = userState.getCurrent();
 
 		try {

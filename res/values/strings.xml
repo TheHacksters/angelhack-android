@@ -18,8 +18,14 @@
     <string name="unknown_runtime_exception">Unknown runtime exception</string>
 
     <string-array name="drawer_items">
-        <item>Dashboard</item>
-        <item>Preferences</item>
+        <item>Events</item>
+        <item>Coworkers</item>
+        <item>Hall of Badges</item>
+    </string-array>
+    <string-array name="drawer_items_icons">
+        <item>ic_events</item>
+        <item>ic_coworkers</item>
+        <item>ic_badge</item>
     </string-array>
 
     <string name="invalid_field">Invalid field</string>
