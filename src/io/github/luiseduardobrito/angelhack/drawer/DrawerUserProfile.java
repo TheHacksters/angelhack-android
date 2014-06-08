@@ -13,9 +13,8 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-
-import com.parse.ParseException;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.parse.ParseException;
 
 @EViewGroup(R.layout.drawer_user_profile)
 public class DrawerUserProfile extends LinearLayout implements Observer {
@@ -98,17 +99,11 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 	 */
 	@AfterViews
 	void initViews() {
-		update(null, null);
+		updateInUiThread();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-
+	@UiThread
+	void updateInUiThread() {
 		User current = userState.getCurrent();
 
 		if (current != null) {
@@ -126,6 +121,16 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 				group.setText("");
 			}
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable observable, Object data) {
+		updateInUiThread();
 	}
 
 	@Click(R.id.avatar)

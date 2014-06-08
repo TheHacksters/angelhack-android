@@ -1,11 +1,14 @@
 package io.github.luiseduardobrito.angelhack.view;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.adapter.CompanyInvitationListAdapter;
+import io.github.luiseduardobrito.angelhack.adapter.EventInvitationListAdapter;
+import io.github.luiseduardobrito.angelhack.model.User;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+
+import com.parse.ParseException;
 
 import android.content.Context;
 import android.view.View;
@@ -17,7 +20,7 @@ import android.widget.TextView;
 public class EventInvitationItemView extends LinearLayout {
 
 	@Bean
-	CompanyInvitationListAdapter adapter;
+	EventInvitationListAdapter adapter;
 
 	@ViewById(R.id.email)
 	TextView emailView;
@@ -29,17 +32,22 @@ public class EventInvitationItemView extends LinearLayout {
 		super(context);
 	}
 
-	public void bind(String email) {
+	public void bind(User user) {
 
-		emailView.setText(email);
-		
-		final String fEmail = email;
+		try {
+			emailView.setText(user.getName());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		final User fUser = user;
 
 		delete.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				adapter.remove(fEmail);
+				adapter.remove(fUser);
 			}
 		});
 	}

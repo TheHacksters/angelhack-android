@@ -3,6 +3,8 @@ package io.github.luiseduardobrito.angelhack.activity;
 import io.github.luiseduardobrito.angelhack.Prefs_;
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.UserState;
+import io.github.luiseduardobrito.angelhack.fragment.CoworkerListFragment;
+import io.github.luiseduardobrito.angelhack.fragment.CoworkerListFragment_;
 import io.github.luiseduardobrito.angelhack.fragment.DrawerFragment;
 import io.github.luiseduardobrito.angelhack.fragment.FeedFragment;
 import io.github.luiseduardobrito.angelhack.fragment.FeedFragment_;
@@ -78,7 +80,7 @@ public class MainActivity extends Activity implements
 	 */
 	@AfterViews
 	void initViews() {
-		
+
 		mNavigationDrawerFragment = (DrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
@@ -97,10 +99,21 @@ public class MainActivity extends Activity implements
 	 */
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-		FeedFragment fragment = FeedFragment_.builder().build();
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.container, fragment)
-				.commit();
+
+		if (position == 0) {
+			FeedFragment fragment = FeedFragment_.builder().build();
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment).commit();
+		}
+
+		else if (position == 1) {
+			CoworkerListFragment fragment = CoworkerListFragment_.builder()
+					.build();
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment).commit();
+		}
 	}
 
 	/**

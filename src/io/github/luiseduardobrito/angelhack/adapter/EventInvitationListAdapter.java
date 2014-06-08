@@ -1,5 +1,6 @@
 package io.github.luiseduardobrito.angelhack.adapter;
 
+import io.github.luiseduardobrito.angelhack.model.User;
 import io.github.luiseduardobrito.angelhack.view.EventInvitationItemView;
 import io.github.luiseduardobrito.angelhack.view.EventInvitationItemView_;
 
@@ -19,27 +20,21 @@ import android.widget.BaseAdapter;
 @EBean(scope = Scope.Singleton)
 public class EventInvitationListAdapter extends BaseAdapter {
 
-	List<String> list;
+	List<User> list;
 
 	@RootContext
 	Context context;
 
 	@AfterInject
 	void init() {
-		list = new ArrayList<String>();
+		list = new ArrayList<User>();
 	}
 
-	public void add(String email) {
-		list.add(email);
-		notifyDataSetChanged();
+	public void clear() {
+		list.clear();
 	}
 
-	public void remove(String email) {
-		list.remove(email);
-		notifyDataSetChanged();
-	}
-
-	public List<String> getList() {
+	public List<User> getList() {
 		return list;
 	}
 
@@ -69,8 +64,16 @@ public class EventInvitationListAdapter extends BaseAdapter {
 			view = EventInvitationItemView_.build(context);
 		}
 
-		view.bind((String) getItem(position));
+		view.bind((User) getItem(position));
 		return view;
+	}
+
+	public void setList(List<User> coworkers) {
+		list = coworkers;
+	}
+
+	public void remove(User fUser) {
+		list.remove(fUser);
 	}
 
 }

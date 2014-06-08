@@ -17,6 +17,11 @@ import com.parse.ParseException;
 @EViewGroup(R.layout.event_list_item)
 public class EventItemView extends LinearLayout {
 
+	OnClickListener listener;
+
+	@ViewById(R.id.event_list_layout)
+	LinearLayout eventListLayout;
+
 	@ViewById(R.id.icon)
 	ImageView icon;
 
@@ -30,9 +35,10 @@ public class EventItemView extends LinearLayout {
 		super(context);
 	}
 
-	public void bind(Event event) {
+	public void bind(Event event, OnClickListener listener) {
 
 		name.setText(event.getName());
+		eventListLayout.setOnClickListener(listener);
 
 		try {
 			members.setText(event.getConfirmed().toString());

@@ -2,7 +2,6 @@ package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.adapter.CompanyInvitationListAdapter;
-import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;
 
@@ -20,6 +19,7 @@ import org.androidannotations.annotations.ViewById;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.EditText;
@@ -43,6 +43,8 @@ public class CreateCompanyActivity extends Activity {
 
 	@ViewById(R.id.email)
 	EditText email;
+
+	ProgressDialog dialog;
 
 	@AfterViews
 	void init() {
@@ -78,6 +80,8 @@ public class CreateCompanyActivity extends Activity {
 		}
 
 		else {
+
+			dialog = ProgressDialog.show(this, null, "Creating company...");
 			performCreateInBg(name.getText().toString());
 		}
 	}
@@ -94,17 +98,22 @@ public class CreateCompanyActivity extends Activity {
 			me.addCompany(company);
 
 			List<String> emailList = adapter.getList();
-			company.batchInvite(emailList);
+			
+			if(emailList.size() > 0) {
+				company.batchInvite(emailList);
+			}
 
 			showResult();
 
 		} catch (ParseException e) {
+			showError(e);
 		}
 
 	}
 
 	@UiThread
 	void showResult() {
+		dialog.dismiss();
 		Toast.makeText(getApplicationContext(), "Company created successfully",
 				Toast.LENGTH_SHORT).show();
 		this.finish();
@@ -116,7 +125,7 @@ public class CreateCompanyActivity extends Activity {
 	 * @param e
 	 */
 	@UiThread
-	void showError(AppException e) {
+	void showError(Exception e) {
 		showError(e.getMessage());
 	}
 
@@ -127,6 +136,7 @@ public class CreateCompanyActivity extends Activity {
 	 */
 	@UiThread
 	void showError(String msg) {
+		dialog.dismiss();
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
 }

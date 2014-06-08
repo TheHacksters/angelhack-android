@@ -17,6 +17,7 @@ import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -114,8 +115,8 @@ public class CreateEventActivity extends Activity {
 		try {
 
 			Event e = new Event(name, type, date, location, company);
-			UserState.getInstance().updateEventList();
 			showResult(e);
+			UserState.getInstance().updateEventList();
 
 		} catch (ParseException e) {
 			showError(e);
@@ -128,7 +129,9 @@ public class CreateEventActivity extends Activity {
 		Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT)
 				.show();
 
-		InviteEventActivity_.intent(this).start();
+		InviteEventActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
+				.mExtraEventId(event.getObjectId())
+				.mExtraEventType(event.getType().getValue()).start();
 		this.finish();
 	}
 

@@ -15,6 +15,8 @@ public class Company extends ParseObject {
 
 	Integer count;
 
+	List<User> coworkers;
+
 	public Company() {
 		try {
 			getUserCount();
@@ -103,19 +105,23 @@ public class Company extends ParseObject {
 
 		fetchIfNeeded();
 
-		List<User> results = new ArrayList<User>();
-		User me = UserState.getInstance().getCurrent();
+		if (coworkers == null) {
+			List<User> results = new ArrayList<User>();
+			User me = UserState.getInstance().getCurrent();
 
-		for (Object obj : getList("members")) {
+			for (Object obj : getList("members")) {
 
-			User u = (User) obj;
+				User u = (User) obj;
 
-			if (!u.getObjectId().equals(me.getObjectId())) {
-				results.add((User) obj);
+				if (!u.getObjectId().equals(me.getObjectId())) {
+					results.add((User) obj);
+				}
+
 			}
 
+			coworkers = results;
 		}
 
-		return results;
+		return coworkers;
 	}
 }
