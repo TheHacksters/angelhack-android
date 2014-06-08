@@ -39,6 +39,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_company_name">Company name</string>
+    <string name="prompt_company_email">Member email (optional)</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_confirm_password">Confirm password</string>

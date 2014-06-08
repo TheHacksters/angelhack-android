@@ -1,13 +1,14 @@
 package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
+import io.github.luiseduardobrito.angelhack.adapter.InvitationListAdapter;
 import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;
 
-import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsMenu;
@@ -20,6 +21,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -28,17 +30,32 @@ import com.parse.ParseException;
 @EActivity(R.layout.activity_create_company)
 public class CreateCompanyActivity extends Activity {
 
+	@Bean
+	InvitationListAdapter adapter;
+
+	@ViewById(R.id.invitations_list)
+	ListView list;
+
 	@ViewById(R.id.name)
 	EditText name;
 
-	@AfterInject
+	@ViewById(R.id.email)
+	EditText email;
+
+	@AfterViews
 	void init() {
-		return;
+		list.setAdapter(adapter);
 	}
 
 	@AfterViews
 	void initViews() {
 		setTitle("Create company");
+	}
+
+	@Click(R.id.add_member)
+	void addMember() {
+		adapter.add(email.getText().toString());
+		email.setText("");
 	}
 
 	@Click(R.id.create_company_button)

@@ -1,5 +1,7 @@
 <resources>
 
+    <color name="bg">#eee</color>
+    
     <color name="brand">#9ba8b0</color>
     <color name="dark_brand">#749ab1</color>
     <color name="darker_brand">#5a7889</color>
