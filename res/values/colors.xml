@@ -19,5 +19,11 @@
     <color name="sidebar_secondary">#141414</color>
     <color name="sidebar_profile">#212121</color>
     <color name="sidebar_divider">#333333</color>
+    <color name="sports">#3D9C55</color>
+    <color name="happyhour">#CA9E48</color>
+    <color name="coffee">#542D17</color>
+    <color name="meeting">#38738F</color>
+    <color name="meal">#903232</color>
+    <color name="birthday">#8854AD</color>
 
 </resources>
