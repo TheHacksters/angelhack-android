@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -111,12 +112,19 @@ public class User extends ParseUser {
 	 * @throws ParseException
 	 */
 	public void addCompany(Company company) throws ParseException {
-		add("companies", company);
-		save();
+		company.addMember(this);
+		company.save();
 	}
 
+	/**
+	 * Get companies lsit
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
 	public List<Company> getCompanies() throws ParseException {
-		fetchIfNeeded();
-		return getList("companies");
+		ParseQuery<Company> query = new ParseQuery<Company>(Company.class);
+		query.whereEqualTo("members", this);
+		return query.find();
 	}
 }

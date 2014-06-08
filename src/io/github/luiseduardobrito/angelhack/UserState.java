@@ -40,10 +40,11 @@ public class UserState extends Observable {
 		current = (User) User.getCurrentUser();
 
 		try {
-			
+
 			current.refresh();
 
-			if (current != null && current.getCompanies().size() > 0) {
+			if (current != null && current.getCompanies() != null
+					&& current.getCompanies().size() > 0) {
 				company = current.getCompanies().get(0);
 			}
 

@@ -1,5 +1,8 @@
 package io.github.luiseduardobrito.angelhack.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -76,5 +79,27 @@ public class Company extends ParseObject {
 		}
 
 		return count;
+	}
+
+	public void batchInvite(List<String> emailList) throws ParseException {
+
+		List<ParseQuery<User>> queries = new ArrayList<ParseQuery<User>>();
+
+		for (String email : emailList) {
+			ParseQuery<User> query = new ParseQuery<User>(User.class);
+			query.whereEqualTo("email", email);
+			queries.add(query);
+		}
+
+		ParseQuery<User> mainQuery = ParseQuery.or(queries);
+
+		for (User user : mainQuery.find()) {
+			user.addCompany(this);
+		}
+	}
+
+	public void addMember(User user) throws ParseException {
+		add("members", user);
+		save();
 	}
 }

@@ -39,6 +39,10 @@ public class InvitationListAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
+	public List<String> getList() {
+		return list;
+	}
+
 	@Override
 	public int getCount() {
 		return list.size();

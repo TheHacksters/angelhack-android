@@ -6,6 +6,8 @@ import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;
 
+import java.util.List;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
@@ -86,10 +88,16 @@ public class CreateCompanyActivity extends Activity {
 		Company company;
 
 		try {
+
 			company = new Company(name, (User) User.getCurrentUser());
 			User me = (User) User.getCurrentUser();
 			me.addCompany(company);
+
+			List<String> emailList = adapter.getList();
+			company.batchInvite(emailList);
+
 			showResult();
+
 		} catch (ParseException e) {
 		}
 
