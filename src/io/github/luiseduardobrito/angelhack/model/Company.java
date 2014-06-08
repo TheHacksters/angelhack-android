@@ -3,12 +3,20 @@ package io.github.luiseduardobrito.angelhack.model;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 @ParseClassName("Company")
 public class Company extends ParseObject {
 
+	Integer count;
+
 	public Company() {
-		// Auto-generated constructor stub
+		try {
+			getUserCount();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -57,5 +65,16 @@ public class Company extends ParseObject {
 	 */
 	public User getAdmin() {
 		return (User) getParseUser("admin");
+	}
+
+	public Integer getUserCount() throws ParseException {
+
+		if (count == null || count == 0) {
+			ParseQuery<User> query = new ParseQuery<User>(User.class);
+			query.whereEqualTo("companies", this);
+			count = query.count();
+		}
+
+		return count;
 	}
 }

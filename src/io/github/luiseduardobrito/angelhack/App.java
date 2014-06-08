@@ -1,6 +1,7 @@
 package io.github.luiseduardobrito.angelhack;
 
 import io.github.luiseduardobrito.angelhack.model.Company;
+import io.github.luiseduardobrito.angelhack.model.Event;
 import io.github.luiseduardobrito.angelhack.model.User;
 
 import org.androidannotations.annotations.AfterInject;
@@ -19,6 +20,7 @@ public class App extends Application {
 	static {
 		ParseUser.registerSubclass(User.class);
 		ParseObject.registerSubclass(Company.class);
+		ParseObject.registerSubclass(Event.class);
 	}
 
 	@AfterInject

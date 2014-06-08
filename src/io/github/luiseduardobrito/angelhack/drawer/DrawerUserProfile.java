@@ -110,7 +110,14 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 		User current = userState.getCurrent();
 
 		if (current != null) {
+
 			name.setText(current.getName());
+
+			if (userState.getCompany() != null) {
+				group.setText(userState.getCompany().getName());
+			} else {
+				group.setText("");
+			}
 		}
 	}
 

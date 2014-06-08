@@ -1,5 +1,6 @@
-package io.github.luiseduardobrito.angelhack;
+package io.github.luiseduardobrito.angelhack.activity;
 
+import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;

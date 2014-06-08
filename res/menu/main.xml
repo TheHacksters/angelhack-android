@@ -3,7 +3,7 @@
     tools:context="io.github.luiseduardobrito.androidboilerplate.activity.MainActivity_" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/settings"/>

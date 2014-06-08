@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    android:background="@drawable/company_layer_shadow"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/company_logo"
+        android:layout_width="72dp"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical|left"
+        android:layout_margin="12dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="6"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/company_workers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_company_members"
+            android:drawablePadding="12dp"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical|right"
+        android:layout_margin="12dp"
+        android:background="@drawable/ic_company_arrow"
+        android:gravity="center" >
+    </ImageView>
+
+</LinearLayout>

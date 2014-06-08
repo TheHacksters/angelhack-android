@@ -306,6 +306,7 @@ public class LoginActivity extends Activity {
 		drawerAdapter.update();
 		showProgress(false);
 
+		ChooseCompanyActivity_.intent(this).start();
 		this.finish();
 	}
 

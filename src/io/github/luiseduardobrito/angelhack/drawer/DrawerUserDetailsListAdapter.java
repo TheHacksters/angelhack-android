@@ -1,8 +1,9 @@
 package io.github.luiseduardobrito.angelhack.drawer;
 
-import io.github.luiseduardobrito.angelhack.CreateCompanyActivity_;
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.UserState;
+import io.github.luiseduardobrito.angelhack.activity.ChooseCompanyActivity_;
+import io.github.luiseduardobrito.angelhack.activity.CreateCompanyActivity_;
 import io.github.luiseduardobrito.angelhack.activity.ProfileActivity;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;
@@ -95,8 +96,15 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 		}
 
 		else {
-			item.bind((String) getItem(position), context.getResources()
-					.getDrawable(R.drawable.ic_company));
+			item.bind((String) getItem(position), new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					ChooseCompanyActivity_.intent(context)
+							.flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
+				}
+
+			}, context.getResources().getDrawable(R.drawable.ic_company));
 		}
 
 		return item;

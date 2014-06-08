@@ -136,7 +136,7 @@ public class MainActivity extends Activity implements
 		actionBar.setTitle(mTitle);
 	}
 
-	@OptionsItem(R.id.action_settings)
+	@OptionsItem(R.id.action_logout)
 	void settings() {
 		User.logOut();
 		this.finish();
