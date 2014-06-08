@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.adapter.InvitationListAdapter;
+import io.github.luiseduardobrito.angelhack.adapter.CompanyInvitationListAdapter;
 import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.User;
@@ -33,7 +33,7 @@ import com.parse.ParseException;
 public class CreateCompanyActivity extends Activity {
 
 	@Bean
-	InvitationListAdapter adapter;
+	CompanyInvitationListAdapter adapter;
 
 	@ViewById(R.id.invitations_list)
 	ListView list;

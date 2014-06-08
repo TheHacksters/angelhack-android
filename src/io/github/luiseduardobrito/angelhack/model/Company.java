@@ -1,5 +1,7 @@
 package io.github.luiseduardobrito.angelhack.model;
 
+import io.github.luiseduardobrito.angelhack.UserState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,5 +97,25 @@ public class Company extends ParseObject {
 	public void addMember(User user) throws ParseException {
 		add("members", user);
 		save();
+	}
+
+	public List<User> getCoworkers() throws ParseException {
+
+		fetchIfNeeded();
+
+		List<User> results = new ArrayList<User>();
+		User me = UserState.getInstance().getCurrent();
+
+		for (Object obj : getList("members")) {
+
+			User u = (User) obj;
+
+			if (!u.getObjectId().equals(me.getObjectId())) {
+				results.add((User) obj);
+			}
+
+		}
+
+		return results;
 	}
 }

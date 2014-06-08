@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.angelhack.adapter;
 
-import io.github.luiseduardobrito.angelhack.view.InvitationItemView;
-import io.github.luiseduardobrito.angelhack.view.InvitationItemView_;
+import io.github.luiseduardobrito.angelhack.view.EventInvitationItemView;
+import io.github.luiseduardobrito.angelhack.view.EventInvitationItemView_;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 @EBean(scope = Scope.Singleton)
-public class InvitationListAdapter extends BaseAdapter {
+public class EventInvitationListAdapter extends BaseAdapter {
 
 	List<String> list;
 
@@ -61,12 +61,12 @@ public class InvitationListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		InvitationItemView view;
+		EventInvitationItemView view;
 
 		if (convertView != null) {
-			view = (InvitationItemView) convertView;
+			view = (EventInvitationItemView) convertView;
 		} else {
-			view = InvitationItemView_.build(context);
+			view = EventInvitationItemView_.build(context);
 		}
 
 		view.bind((String) getItem(position));

@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.angelhack.view;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.adapter.InvitationListAdapter;
+import io.github.luiseduardobrito.angelhack.adapter.CompanyInvitationListAdapter;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
@@ -13,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-@EViewGroup(R.layout.invitation_list_item)
-public class InvitationItemView extends LinearLayout {
+@EViewGroup(R.layout.company_invitation_list_item)
+public class CompanyInvitationItemView extends LinearLayout {
 
 	@Bean
-	InvitationListAdapter adapter;
+	CompanyInvitationListAdapter adapter;
 
 	@ViewById(R.id.email)
 	TextView emailView;
@@ -25,7 +25,7 @@ public class InvitationItemView extends LinearLayout {
 	@ViewById(R.id.delete)
 	ImageView delete;
 
-	public InvitationItemView(Context context) {
+	public CompanyInvitationItemView(Context context) {
 		super(context);
 	}
 

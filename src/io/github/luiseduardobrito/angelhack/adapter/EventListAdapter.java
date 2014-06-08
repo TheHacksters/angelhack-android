@@ -15,6 +15,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.EBean.Scope;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
 
 import android.content.Context;
 import android.view.View;
@@ -40,7 +41,6 @@ public class EventListAdapter extends BaseAdapter implements Observer {
 
 	public void add(Event event) {
 		list.add(event);
-		notifyDataSetChanged();
 	}
 
 	public void remove(Event event) {
@@ -96,6 +96,11 @@ public class EventListAdapter extends BaseAdapter implements Observer {
 			}
 		}
 
+		notifyInUiThread();
+	}
+
+	@UiThread
+	void notifyInUiThread() {
 		notifyDataSetChanged();
 	}
 }

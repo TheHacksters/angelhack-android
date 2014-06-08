@@ -74,8 +74,15 @@ public class User extends ParseUser {
 	 * Get user name
 	 * 
 	 * @return name
+	 * @throws ParseException
 	 */
-	public String getName() {
+	public String getName() throws ParseException {
+		try {
+			fetchIfNeeded();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return getString("name");
 	}
 
@@ -85,6 +92,12 @@ public class User extends ParseUser {
 	 * @return email
 	 */
 	public String getEmail() {
+		try {
+			fetchIfNeeded();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return super.getEmail();
 	}
 
@@ -94,6 +107,12 @@ public class User extends ParseUser {
 	 * @return group
 	 */
 	public Company getGroup() {
+		try {
+			fetchIfNeeded();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return (Company) getParseObject("group");
 	}
 
@@ -103,6 +122,12 @@ public class User extends ParseUser {
 	 * @return birthDay
 	 */
 	public Date getBirthDay() {
+		try {
+			fetchIfNeeded();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return getDate("birthDay");
 	}
 

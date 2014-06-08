@@ -15,6 +15,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import com.parse.ParseException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -111,7 +113,12 @@ public class DrawerUserProfile extends LinearLayout implements Observer {
 
 		if (current != null) {
 
-			name.setText(current.getName());
+			try {
+				name.setText(current.getName());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			if (userState.getCompany() != null) {
 				group.setText(userState.getCompany().getName());

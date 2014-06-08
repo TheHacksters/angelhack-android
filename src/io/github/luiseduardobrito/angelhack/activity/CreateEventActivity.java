@@ -16,6 +16,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class CreateEventActivity extends Activity {
 
 	@ViewById(R.id.location)
 	EditText eventLocation;
+
+	ProgressDialog dialog;
 
 	@AfterViews
 	void initViews() {
@@ -92,10 +95,13 @@ public class CreateEventActivity extends Activity {
 	}
 
 	@Click(R.id.create)
+	@UiThread
 	void createEvent() {
 		String name = eventName.getText().toString();
 		Date date = new Date();
 		String location = eventLocation.getText().toString();
+
+		dialog = ProgressDialog.show(this, null, "Creating event...");
 
 		performEventInBg(name, currentEventType, date, location, UserState
 				.getInstance().getCompany());
@@ -104,8 +110,13 @@ public class CreateEventActivity extends Activity {
 	@Background
 	void performEventInBg(String name, Type type, Date date, String location,
 			Company company) {
+
 		try {
-			showResult(new Event(name, type, date, location, company));
+
+			Event e = new Event(name, type, date, location, company);
+			UserState.getInstance().updateEventList();
+			showResult(e);
+
 		} catch (ParseException e) {
 			showError(e);
 		}
@@ -113,9 +124,11 @@ public class CreateEventActivity extends Activity {
 
 	@UiThread
 	void showResult(Event event) {
+		dialog.dismiss();
 		Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT)
 				.show();
-		UserState.getInstance().updateEventList();
+
+		InviteEventActivity_.intent(this).start();
 		this.finish();
 	}
 
@@ -126,6 +139,7 @@ public class CreateEventActivity extends Activity {
 
 	@UiThread
 	void showError(String message) {
+		dialog.dismiss();
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }
