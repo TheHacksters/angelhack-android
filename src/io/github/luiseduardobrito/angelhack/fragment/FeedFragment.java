@@ -1,31 +1,30 @@
 package io.github.luiseduardobrito.angelhack.fragment;
 
 import io.github.luiseduardobrito.angelhack.R;
-import io.github.luiseduardobrito.angelhack.card.SimpleThumbnailCard;
-import it.gmariotti.cardslib.library.view.CardView;
+import io.github.luiseduardobrito.angelhack.adapter.EventListAdapter;
+import io.github.luiseduardobrito.angelhack.model.Event;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import android.app.Fragment;
+import android.widget.ListView;
 
 @EFragment(R.layout.fragment_feed)
 public class FeedFragment extends Fragment {
 
-	@ViewById(R.id.card)
-	CardView cardView;
+	@Bean
+	EventListAdapter adapter;
+
+	@ViewById(R.id.event_list)
+	ListView list;
 
 	@AfterViews
 	void initViews() {
-
-		// Create a Card
-		SimpleThumbnailCard card = new SimpleThumbnailCard(getActivity(),
-				R.drawable.carddemo_ic_gmaps_large);
-		card.setTitle("Welcome!");
-		card.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus odio, accumsan vitae dui in, vulputate laoreet velit. Quisque ac sem suscipit, adipiscing augue non, pharetra nunc. Phasellus sed lobortis nisi.");
-
-		// Show card in view
-		cardView.setCard(card);
+		adapter.clear();
+		adapter.add(new Event());
+		list.setAdapter(adapter);
 	}
 }

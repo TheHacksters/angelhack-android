@@ -113,7 +113,6 @@ public class User extends ParseUser {
 	 */
 	public void addCompany(Company company) throws ParseException {
 		company.addMember(this);
-		company.save();
 	}
 
 	/**

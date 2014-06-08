@@ -71,14 +71,8 @@ public class Company extends ParseObject {
 	}
 
 	public Integer getUserCount() throws ParseException {
-
-		if (count == null || count == 0) {
-			ParseQuery<User> query = new ParseQuery<User>(User.class);
-			query.whereEqualTo("companies", this);
-			count = query.count();
-		}
-
-		return count;
+		fetchIfNeeded();
+		return getList("members").size();
 	}
 
 	public void batchInvite(List<String> emailList) throws ParseException {
