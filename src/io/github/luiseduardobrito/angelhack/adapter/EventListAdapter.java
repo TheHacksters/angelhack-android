@@ -1,7 +1,7 @@
 package io.github.luiseduardobrito.angelhack.adapter;
 
 import io.github.luiseduardobrito.angelhack.UserState;
-import io.github.luiseduardobrito.angelhack.activity.InviteEventActivity_;
+import io.github.luiseduardobrito.angelhack.activity.EventProfileActivity_;
 import io.github.luiseduardobrito.angelhack.model.Event;
 import io.github.luiseduardobrito.angelhack.view.EventItemView;
 import io.github.luiseduardobrito.angelhack.view.EventItemView_;
@@ -78,7 +78,7 @@ public class EventListAdapter extends BaseAdapter implements Observer {
 			@Override
 			public void onClick(View v) {
 				Event e = (Event) getItem(fPosition);
-				InviteEventActivity_.intent(context)
+				EventProfileActivity_.intent(context)
 						.flags(Intent.FLAG_ACTIVITY_NEW_TASK)
 						.mExtraEventId(e.getObjectId())
 						.mExtraEventType(e.getType().getValue()).start();

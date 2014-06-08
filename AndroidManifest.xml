@@ -80,6 +80,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
         </activity>
+        <activity
+            android:name="io.github.luiseduardobrito.angelhack.activity.EventProfileActivity_"
+            android:label="@string/title_activity_event_profile"
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
+        </activity>
     </application>
 
 </manifest>

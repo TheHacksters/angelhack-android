@@ -129,7 +129,7 @@ public class CreateEventActivity extends Activity {
 		Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT)
 				.show();
 
-		InviteEventActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
+		EventProfileActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NEW_TASK)
 				.mExtraEventId(event.getObjectId())
 				.mExtraEventType(event.getType().getValue()).start();
 		this.finish();
