@@ -3,7 +3,6 @@ package io.github.luiseduardobrito.angelhack.fragment;
 import io.github.luiseduardobrito.angelhack.R;
 import io.github.luiseduardobrito.angelhack.activity.CreateEventActivity_;
 import io.github.luiseduardobrito.angelhack.adapter.EventListAdapter;
-import io.github.luiseduardobrito.angelhack.model.Event;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -25,8 +24,6 @@ public class FeedFragment extends Fragment {
 
 	@AfterViews
 	void initViews() {
-		adapter.clear();
-		adapter.add(new Event());
 		list.setAdapter(adapter);
 	}
 

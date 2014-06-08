@@ -2,6 +2,7 @@ package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.Prefs_;
 import io.github.luiseduardobrito.angelhack.R;
+import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.fragment.DrawerFragment;
 import io.github.luiseduardobrito.angelhack.fragment.FeedFragment;
 import io.github.luiseduardobrito.angelhack.fragment.FeedFragment_;
@@ -26,6 +27,8 @@ import android.view.MenuItem;
 public class MainActivity extends Activity implements
 		DrawerFragment.NavigationDrawerCallbacks {
 
+	UserState userState = UserState.getInstance();
+
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -49,7 +52,7 @@ public class MainActivity extends Activity implements
 	@AfterInject
 	void init() {
 
-		User me = (User) User.getCurrentUser();
+		User me = userState.getCurrent();
 
 		if (me == null) {
 
@@ -65,7 +68,6 @@ public class MainActivity extends Activity implements
 				LoginActivity_.intent(getApplicationContext())
 						.flags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
 			}
-
 		}
 	}
 
@@ -76,6 +78,7 @@ public class MainActivity extends Activity implements
 	 */
 	@AfterViews
 	void initViews() {
+		
 		mNavigationDrawerFragment = (DrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();

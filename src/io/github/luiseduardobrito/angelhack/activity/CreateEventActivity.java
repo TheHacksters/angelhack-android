@@ -1,6 +1,7 @@
 package io.github.luiseduardobrito.angelhack.activity;
 
 import io.github.luiseduardobrito.angelhack.R;
+import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.model.Company;
 import io.github.luiseduardobrito.angelhack.model.Event;
 import io.github.luiseduardobrito.angelhack.model.Event.Type;
@@ -25,6 +26,8 @@ import com.parse.ParseException;
 @EActivity(R.layout.activity_create_event)
 public class CreateEventActivity extends Activity {
 
+	Event.Type currentEventType;
+
 	@ViewById(R.id.create_event_layout)
 	LinearLayout createEventLayout;
 
@@ -47,30 +50,30 @@ public class CreateEventActivity extends Activity {
 
 	@Click(R.id.coffee)
 	void coffee() {
-		Event.Type type = Event.Type.COFFEE;
-		setEventTitle(type.getTitleRes());
-		setBackgroundColor(type.getColorRes());
+		currentEventType = Event.Type.COFFEE;
+		setEventTitle(currentEventType.getTitleRes());
+		setBackgroundColor(currentEventType.getColorRes());
 	}
 
 	@Click(R.id.meal)
 	void meal() {
-		Event.Type type = Event.Type.MEAL;
-		setEventTitle(type.getTitleRes());
-		setBackgroundColor(type.getColorRes());
+		currentEventType = Event.Type.MEAL;
+		setEventTitle(currentEventType.getTitleRes());
+		setBackgroundColor(currentEventType.getColorRes());
 	}
 
 	@Click(R.id.meeting)
 	void meeting() {
-		Event.Type type = Event.Type.MEETING;
-		setEventTitle(type.getTitleRes());
-		setBackgroundColor(type.getColorRes());
+		currentEventType = Event.Type.MEETING;
+		setEventTitle(currentEventType.getTitleRes());
+		setBackgroundColor(currentEventType.getColorRes());
 	}
 
 	@Click(R.id.happyhour)
 	void happyhour() {
-		Event.Type type = Event.Type.HAPPYHOUR;
-		setEventTitle(type.getTitleRes());
-		setBackgroundColor(type.getColorRes());
+		currentEventType = Event.Type.HAPPYHOUR;
+		setEventTitle(currentEventType.getTitleRes());
+		setBackgroundColor(currentEventType.getColorRes());
 	}
 
 	@Click(R.id.sports)
@@ -90,7 +93,12 @@ public class CreateEventActivity extends Activity {
 
 	@Click(R.id.create)
 	void createEvent() {
+		String name = eventName.getText().toString();
+		Date date = new Date();
+		String location = eventLocation.getText().toString();
 
+		performEventInBg(name, currentEventType, date, location, UserState
+				.getInstance().getCompany());
 	}
 
 	@Background
@@ -107,6 +115,7 @@ public class CreateEventActivity extends Activity {
 	void showResult(Event event) {
 		Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT)
 				.show();
+		UserState.getInstance().updateEventList();
 		this.finish();
 	}
 

@@ -13,6 +13,7 @@ import org.androidannotations.annotations.ViewById;
 
 import android.app.Activity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -46,6 +47,14 @@ public class ChooseCompanyActivity extends Activity {
 			emptyLayout.setVisibility(View.VISIBLE);
 			companyLayout.setVisibility(View.GONE);
 		}
+		
+		adapter.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	@Click(R.id.create_company_button)

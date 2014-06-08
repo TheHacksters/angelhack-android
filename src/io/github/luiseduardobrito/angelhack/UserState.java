@@ -1,8 +1,10 @@
 package io.github.luiseduardobrito.angelhack;
 
 import io.github.luiseduardobrito.angelhack.model.Company;
+import io.github.luiseduardobrito.angelhack.model.Event;
 import io.github.luiseduardobrito.angelhack.model.User;
 
+import java.util.List;
 import java.util.Observable;
 
 import com.parse.ParseException;
@@ -22,6 +24,8 @@ public class UserState extends Observable {
 
 	private User current;
 	private Company company;
+	private List<Company> companyList;
+	private List<Event> eventList;
 
 	private UserState() {
 		update();
@@ -35,6 +39,20 @@ public class UserState extends Observable {
 		return company;
 	}
 
+	public void setCompany(Company company) {
+		this.company = company;
+		setChanged();
+		notifyObservers();
+	}
+
+	public List<Company> getCompanyList() {
+		return companyList;
+	}
+
+	public List<Event> getEventList() {
+		return eventList;
+	}
+
 	public void update() {
 
 		current = (User) User.getCurrentUser();
@@ -42,11 +60,14 @@ public class UserState extends Observable {
 		try {
 
 			current.refresh();
+			companyList = current.getCompanies();
 
-			if (current != null && current.getCompanies() != null
+			if (current != null && getCompanyList() != null
 					&& current.getCompanies().size() > 0) {
 				company = current.getCompanies().get(0);
 			}
+
+			updateEventList();
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -54,5 +75,15 @@ public class UserState extends Observable {
 
 		setChanged();
 		notifyObservers();
+	}
+
+	public void updateEventList() {
+		try {
+			eventList = current.getAvailableEvents();
+			setChanged();
+			notifyObservers();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }

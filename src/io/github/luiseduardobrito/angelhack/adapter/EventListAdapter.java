@@ -1,6 +1,8 @@
 package io.github.luiseduardobrito.angelhack.adapter;
 
+import io.github.luiseduardobrito.angelhack.UserState;
 import io.github.luiseduardobrito.angelhack.model.Event;
+import io.github.luiseduardobrito.angelhack.model.User;
 import io.github.luiseduardobrito.angelhack.view.EventItemView;
 import io.github.luiseduardobrito.angelhack.view.EventItemView_;
 
@@ -24,12 +26,16 @@ public class EventListAdapter extends BaseAdapter implements Observer {
 
 	List<Event> list;
 
+	UserState userState = UserState.getInstance();
+
 	@RootContext
 	Context context;
 
 	@AfterInject
 	void init() {
 		list = new ArrayList<Event>();
+		userState.addObserver(this);
+		update(null, null);
 	}
 
 	public void add(Event event) {
@@ -79,6 +85,17 @@ public class EventListAdapter extends BaseAdapter implements Observer {
 
 	@Override
 	public void update(Observable observable, Object data) {
+
+		clear();
+
+		User current = UserState.getInstance().getCurrent();
+
+		if (current != null) {
+			for (Event event : userState.getEventList()) {
+				add(event);
+			}
+		}
+
 		notifyDataSetChanged();
 	}
 }

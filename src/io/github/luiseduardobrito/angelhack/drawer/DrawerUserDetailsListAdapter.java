@@ -14,6 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.EBean.Scope;
 import org.androidannotations.annotations.RootContext;
@@ -40,6 +41,12 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 	@AfterInject
 	void init() {
 		userState.addObserver(this);
+		labels = new ArrayList<String>();
+		updateInBgThread();
+	}
+
+	@Background
+	void updateInBgThread() {
 		update(null, null);
 	}
 
@@ -119,9 +126,9 @@ public class DrawerUserDetailsListAdapter extends BaseAdapter implements
 		User me = userState.getCurrent();
 
 		try {
-			if (me != null && me.getCompanies() != null) {
+			if (me != null && userState.getCompanyList() != null) {
 
-				for (Company company : userState.getCurrent().getCompanies()) {
+				for (Company company : userState.getCompanyList()) {
 					company.fetchIfNeeded();
 					labels.add(company.getName());
 

@@ -18,24 +18,30 @@ import org.androidannotations.annotations.RootContext;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.parse.ParseException;
-
 @EBean(scope = Scope.Singleton)
 public class CompanyListAdapter extends BaseAdapter implements Observer {
+
+	UserState userState = UserState.getInstance();
 
 	@RootContext
 	Context context;
 
 	User current;
+	OnClickListener listener;
 	List<Company> list = new ArrayList<Company>();
 
 	@AfterInject
 	void init() {
 		UserState.getInstance().addObserver(this);
 		update(null, null);
+	}
+
+	public void setOnClickListener(OnClickListener l) {
+		listener = l;
 	}
 
 	@Override
@@ -64,18 +70,26 @@ public class CompanyListAdapter extends BaseAdapter implements Observer {
 			view = CompanyItemView_.build(context);
 		}
 
-		view.bind((Company) getItem(position));
+		final int fPosition = position;
+		view.bind((Company) getItem(fPosition), new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				userState.setCompany((Company) getItem(fPosition));
+
+				if (listener != null) {
+					listener.onClick(null);
+				}
+			}
+		});
 
 		return view;
 	}
 
 	@Override
 	public void update(Observable observable, Object data) {
-		current = UserState.getInstance().getCurrent();
-		try {
-			list = current.getCompanies();
-		} catch (ParseException e) {
-			list = new ArrayList<Company>();
-		}
+		list = UserState.getInstance().getCompanyList();
+		notifyDataSetChanged();
 	}
 }

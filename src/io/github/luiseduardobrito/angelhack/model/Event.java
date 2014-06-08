@@ -3,6 +3,7 @@ package io.github.luiseduardobrito.angelhack.model;
 import io.github.luiseduardobrito.angelhack.R;
 
 import java.util.Date;
+import java.util.List;
 
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -64,11 +65,18 @@ public class Event extends ParseObject {
 
 	public Event(String name, Type type, Date date, String location,
 			Company company) throws ParseException {
+
+		// Setup event attr
 		setName(name);
 		setType(type);
 		setDate(date);
 		setLocation(location);
+
+		// Setup event creator
 		setCreator((User) User.getCurrentUser());
+		add("confirmed", User.getCurrentUser());
+
+		// Set event company
 		setCompany(company);
 		save();
 	}
@@ -107,5 +115,17 @@ public class Event extends ParseObject {
 
 	public String getLocation() {
 		return getString("location");
+	}
+
+	public Integer getConfirmed() throws ParseException {
+
+		fetchIfNeeded();
+		List<Object> list = getList("confirmed");
+
+		if (list != null) {
+			return list.size();
+		} else {
+			return 0;
+		}
 	}
 }

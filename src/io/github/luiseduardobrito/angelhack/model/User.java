@@ -3,6 +3,7 @@ package io.github.luiseduardobrito.angelhack.model;
 import io.github.luiseduardobrito.angelhack.exception.AppException;
 import io.github.luiseduardobrito.angelhack.exception.ErrorCode;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -125,5 +126,30 @@ public class User extends ParseUser {
 		ParseQuery<Company> query = new ParseQuery<Company>(Company.class);
 		query.whereEqualTo("members", this);
 		return query.find();
+	}
+
+	/**
+	 * Get visible and available events
+	 * 
+	 * @return eventList
+	 * @throws ParseException
+	 */
+	public List<Event> getAvailableEvents() throws ParseException {
+
+		ParseQuery<Event> creatorQuery = new ParseQuery<Event>(Event.class);
+		creatorQuery.whereEqualTo("creator", this);
+
+		ParseQuery<Event> invitedQuery = new ParseQuery<Event>(Event.class);
+		invitedQuery.whereEqualTo("invited", this);
+
+		ParseQuery<Event> confirmedQuery = new ParseQuery<Event>(Event.class);
+		confirmedQuery.whereEqualTo("confirmed", this);
+
+		List<ParseQuery<Event>> mainQuery = new ArrayList<ParseQuery<Event>>();
+		mainQuery.add(creatorQuery);
+		mainQuery.add(invitedQuery);
+		mainQuery.add(confirmedQuery);
+
+		return ParseQuery.or(mainQuery).find();
 	}
 }

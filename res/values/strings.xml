@@ -74,5 +74,7 @@
     <string name="meeting">meeting</string>
     <string name="meal">meal</string>
     <string name="birthday">birthday</string>
+    <string name="title_activity_invite_event">Invite coworkers</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

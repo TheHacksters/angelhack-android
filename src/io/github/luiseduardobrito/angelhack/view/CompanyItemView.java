@@ -17,6 +17,9 @@ import com.parse.ParseException;
 @EViewGroup(R.layout.company_list_item)
 public class CompanyItemView extends LinearLayout {
 
+	@ViewById(R.id.company_item_layout)
+	LinearLayout companyLayout;
+
 	@ViewById(R.id.company_logo)
 	ImageView companyLogo;
 
@@ -30,8 +33,9 @@ public class CompanyItemView extends LinearLayout {
 		super(context);
 	}
 
-	public void bind(Company company) {
+	public void bind(Company company, OnClickListener listener) {
 
+		companyLayout.setOnClickListener(listener);
 		companyName.setText(company.getName());
 
 		try {

@@ -36,7 +36,7 @@ public class DrawerItemAdapter extends BaseAdapter implements Observer {
 	/**
 	 * Drawer items list
 	 */
-	List<DrawerItem> items;
+	List<DrawerItem> items = new ArrayList<DrawerItem>();
 
 	/**
 	 * Constructor
