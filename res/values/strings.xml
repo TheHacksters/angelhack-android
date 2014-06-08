@@ -39,12 +39,16 @@
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_company_name">Company name</string>
+    <string name="prompt_event_name">Event name</string>
+    <string name="prompt_event_date">Date and time</string>
+    <string name="prompt_event_location">Location</string>
     <string name="prompt_company_email">Member email (optional)</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_confirm_password">Confirm password</string>
     <string name="action_signin"><b>Sign in</b> with existing account</string>
     <string name="action_signup"><b>Register</b> a new account</string>
+    <string name="action_select_all">Select All</string>
     <string name="action_signin_short">Sign in</string>
     <string name="action_signup_short">Sign up</string>
     <string name="action_birthday">Select your birthday</string>
@@ -61,5 +65,14 @@
     <string name="title_activity_create_company">CreateCompanyActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_choose_company">ChooseCompanyActivity</string>
+    <string name="title_activity_create_event">Create new event</string>
+
+    <!-- Events -->
+    <string name="sports">sports</string>
+    <string name="happyhour">happy hour</string>
+    <string name="coffee">coffee</string>
+    <string name="meeting">meeting</string>
+    <string name="meal">meal</string>
+    <string name="birthday">birthday</string>
 
 </resources>

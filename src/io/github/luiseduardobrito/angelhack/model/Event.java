@@ -1,5 +1,7 @@
 package io.github.luiseduardobrito.angelhack.model;
 
+import io.github.luiseduardobrito.angelhack.R;
+
 import java.util.Date;
 
 import com.parse.ParseClassName;
@@ -10,8 +12,12 @@ import com.parse.ParseObject;
 public class Event extends ParseObject {
 
 	public static enum Type {
-		SPORTS("sports"), HAPPY_HOUR("happyhour"), COFFEE("coffee"), MEETING(
-				"meeting"), MEAL("meal"), BIRTHDAY("birthday");
+		SPORTS("sports", R.string.sports, R.color.sports),
+		HAPPYHOUR("happyhour", R.string.happyhour, R.color.happyhour),
+		COFFEE("coffee", R.string.coffee, R.color.coffee),
+		MEETING("meeting", R.string.meeting, R.color.meeting),
+		MEAL("meal", R.string.meal, R.color.meal),
+		BIRTHDAY("birthday", R.string.birthday, R.color.birthday);
 
 		public static Type fromString(String text) {
 			if (text != null) {
@@ -25,9 +31,13 @@ public class Event extends ParseObject {
 		}
 
 		String value;
+		int colorRes;
+		int titleRes;
 
-		private Type(String value) {
+		private Type(String value, int titleRes, int colorRes) {
 			this.value = value;
+			this.titleRes = titleRes;
+			this.colorRes = colorRes;
 		}
 
 		@Override
@@ -37,6 +47,14 @@ public class Event extends ParseObject {
 
 		public String getValue() {
 			return value;
+		}
+
+		public int getColorRes() {
+			return colorRes;
+		}
+
+		public int getTitleRes() {
+			return titleRes;
 		}
 	}
 

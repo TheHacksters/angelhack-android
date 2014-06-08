@@ -40,6 +40,7 @@
             android:name="io.github.luiseduardobrito.angelhack.activity.ProfileActivity"
             android:label="@string/app_name"
             android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,7 +48,8 @@
         </activity>
         <activity
             android:name="io.github.luiseduardobrito.angelhack.activity.CreateCompanyActivity_"
-            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_" >
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
@@ -55,7 +57,17 @@
         <activity
             android:name="io.github.luiseduardobrito.angelhack.activity.ChooseCompanyActivity_"
             android:label="@string/title_activity_choose_company"
-            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_" >
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
+        </activity>
+        <activity
+            android:name="io.github.luiseduardobrito.angelhack.activity.CreateEventActivity_"
+            android:label="@string/title_activity_create_event"
+            android:parentActivityName="io.github.luiseduardobrito.angelhack.activity.MainActivity_"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.luiseduardobrito.angelhack.activity.MainActivity_" />
