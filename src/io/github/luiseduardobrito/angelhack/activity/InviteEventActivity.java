@@ -73,7 +73,7 @@ public class InviteEventActivity extends Activity {
 	@AfterViews
 	void initViews() {
 
-		setTitle("Invite coworkers");
+//		setTitle("Invite coworkers");
 
 		if (mExtraEventType != null && !mExtraEventType.isEmpty()) {
 

@@ -75,7 +75,7 @@ public class EventProfileActivity extends Activity {
 	void initViews() {
 
 		list.setAdapter(adapter);
-		setTitle("Event details");
+		setTitle("");
 
 		if (event != null) {
 

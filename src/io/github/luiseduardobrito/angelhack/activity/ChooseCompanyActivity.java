@@ -36,7 +36,7 @@ public class ChooseCompanyActivity extends Activity {
 	@AfterViews
 	void initViews() {
 
-		setTitle("Choose company");
+		setTitle("");
 		list.setAdapter(adapter);
 
 		if (UserState.getInstance() == null) {

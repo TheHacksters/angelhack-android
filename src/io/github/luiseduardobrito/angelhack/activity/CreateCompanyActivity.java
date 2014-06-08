@@ -53,7 +53,7 @@ public class CreateCompanyActivity extends Activity {
 
 	@AfterViews
 	void initViews() {
-		setTitle("Create company");
+		setTitle("");
 	}
 
 	@Click(R.id.add_member)
@@ -98,8 +98,8 @@ public class CreateCompanyActivity extends Activity {
 			me.addCompany(company);
 
 			List<String> emailList = adapter.getList();
-			
-			if(emailList.size() > 0) {
+
+			if (emailList.size() > 0) {
 				company.batchInvite(emailList);
 			}
 

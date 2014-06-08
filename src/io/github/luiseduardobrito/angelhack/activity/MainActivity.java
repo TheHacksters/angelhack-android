@@ -54,6 +54,8 @@ public class MainActivity extends Activity implements
 	@AfterInject
 	void init() {
 
+		setTitle("");
+
 		User me = userState.getCurrent();
 
 		if (me == null) {
@@ -149,7 +151,7 @@ public class MainActivity extends Activity implements
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		actionBar.setTitle("");
 	}
 
 	@OptionsItem(R.id.action_logout)
